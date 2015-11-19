@@ -10,9 +10,11 @@ Flask-Script==2.0.5
 Flask-SQLAlchemy==2.0
 itsdangerous==0.24
 Jinja2==2.7.3
+jwt==0.3.2
 linecache2==1.0.0
 Mako==1.0.1
 MarkupSafe==0.23
+pycrypto==2.6.1
 pytz==2014.10
 requests==2.8.1
 six==1.9.0

@@ -1,6 +1,6 @@
 from flask import Flask
 from settings.config import config
-from .extensions import jwt, db, bootstrap
+from .extensions import db, bootstrap
 from flask.ext.restful import Api
 
 def create_app(config_name):
@@ -15,7 +15,7 @@ def create_app(config_name):
     api_url = '/api/v1'
 
     api = Api(app)
-    api.add_resource(resources.PopularShows, api_url + '/popular')
+    api.add_resource(resources.Analyse, api_url + '/analyse')
 
     return app
 
