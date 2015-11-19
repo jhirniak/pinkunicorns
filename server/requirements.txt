@@ -12,6 +12,7 @@ Jinja2==2.7.3
 linecache2==1.0.0
 Mako==1.0.1
 MarkupSafe==0.23
+python-social-auth
 pytz==2014.10
 six==1.9.0
 SQLAlchemy==0.9.8
