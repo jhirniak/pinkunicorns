@@ -15,7 +15,7 @@ def create_app(config_name):
     api_url = '/api/v1'
 
     api = Api(app)
-    api.add_resource(resources.PopularShows, api_url + '/popular')
+    api.add_resource(resources.Analyse, api_url + '/analyse')
 
     return app
 
