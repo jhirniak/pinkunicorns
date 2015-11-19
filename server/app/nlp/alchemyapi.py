@@ -146,7 +146,7 @@ class AlchemyAPI:
         try:
             # Open the key file and read the key
             f = open("api_key.txt", "r")
-            key = f.read().strip()
+            key = '348c0c522d11c4ea705d2100100e020e3b6ddb23' #f.read().strip()
 
             if key == '':
                 # The key file should't be blank
