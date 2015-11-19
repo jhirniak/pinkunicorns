@@ -17,3 +17,4 @@ six==1.9.0
 SQLAlchemy==0.9.8
 unittest2==1.0.0
 Werkzeug==0.10.1
+pymongo==3.1.1
