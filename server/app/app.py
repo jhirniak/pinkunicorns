@@ -1,6 +1,6 @@
 from flask import Flask
 from settings.config import config
-from .extensions import jwt, db, bootstrap
+from .extensions import db, bootstrap
 from flask.ext.restful import Api
 
 def create_app(config_name):
