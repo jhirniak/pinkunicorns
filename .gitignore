@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -67,3 +68,7 @@ dist/
 
 # Static is build automatically
 server/app/static
+=======
+.idea
+.DS_Store
+>>>>>>> master
