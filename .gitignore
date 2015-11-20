@@ -67,7 +67,6 @@ bower_components/
 dist/
 
 # Static is build automatically
-server/app/static
 =======
 .idea
 .DS_Store
