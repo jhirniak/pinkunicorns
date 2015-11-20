@@ -123,8 +123,8 @@
         width="400"
         height="600"
         frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM
-        &q=Space+Needle,Seattle+WA" allowfullscreen>
+        ng-src="{{getRU + '?origin='+travel['places'][0]['pos']+'&destination='+travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM'}}"
+        allowfullscreen>
       </iframe>
     </div>
     <div class="info">
