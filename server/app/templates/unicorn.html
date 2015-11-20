@@ -245,15 +245,17 @@
 
 <div class="container" ng-show="restaurants" id="restaurants">
 <div class="jumbotron">
-  <div id="map" style="width: 900px; height: 720px;"></div>
-  <ol>
-    <li ng-repeat="restaurant in restaurants">
-      <a href="{{ restaurant['reserve_url'] }}">
-        {{ restaurant['name'] }}
-        {{ toDollars(restaurant['price']) }}
-      </a>
-    </li>
-  </ol>
+  <div id="map" style=" position: relative; top: 0; width: 750px; height: 750px; display: inline-block;"></div>
+  <div style="width: 260px; max-height: 740px; word-wrap: break-word; display: inline-block; overflow-y:scroll; "  >
+    <ul class="list-group">
+      <li ng-repeat="restaurant in restaurants" class="list-group-item">
+        <a href="{{ restaurant['reserve_url'] }}">
+          <span class="badge list-group-item-success pull-right">{{ toDollars(restaurant['price']) }}</span>
+          {{ restaurant['name'] }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 </div>
 {% endraw %}

@@ -87,7 +87,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
                     console.log('Center lng: ', rect.lngMax);
 
                     var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 10,
+                        zoom: 13,
                         center: new google.maps.LatLng( (rect.latMax + rect.latMin) / 2, (rect.lngMax + rect.lngMin) / 2),
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
