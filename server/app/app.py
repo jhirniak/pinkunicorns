@@ -28,6 +28,7 @@ def create_app(config_name):
     api.add_resource(resources.Analyse, api_url + '/analyse')
     api.add_resource(resources.RunTask, api_url + '/run')
     api.add_resource(resources.GoogleCalendar, api_url + '/gcal')
+    api.add_resource(resources.Jarvis, api_url + '/jarvis')
 
     return app
 

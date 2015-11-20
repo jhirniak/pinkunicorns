@@ -5,6 +5,7 @@ from app.api.social import Facebook
 from app.api.shopping import Amazon
 #from app.api.gcal import GCal
 import json
+from app.api.jarvis import *
 
 class Analyse(restful.Resource):
     def get(self):
@@ -56,11 +57,14 @@ class RunTask(restful.Resource):
 
             return products
 
-        elif args['category'] == 'travel':
-            pass
 
-        elif args['category'] == 'meeting':
-            pass
+class Jarvis(restful.Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('text')
+        args = parser.parse_args()
 
-        else:
-            pass
+        data = parse(args['text'])
+
+        return data
+
