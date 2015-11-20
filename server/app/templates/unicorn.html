@@ -139,6 +139,38 @@
       </div>
     </div>
   </div>
+                   <!-- <div 
+                        style="padding: 10px;">
+                        <div class="col-md-2" style="height: 100px;">
+                            <a href="{{ product.offer_url }}" target="_blank">
+                                <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
+                            </a>
+                        </div>
+                        <div class="col-md-4" style="height: 100px;">
+                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
+                                    <b>
+                                        {{product.name}}
+                                    </b>
+                                </a>                      
+                                    <span>£{{product.price}}</span>
+                        </div>
+                    </div>
+                    <!-- <div
+                         style="padding: 10px;">
+                         <div class="col-md-2" style="height: 100px;">
+                             <a href="{{ product.offer_url }}" target="_blank">
+                                 <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
+                             </a>
+                         </div>
+                         <div class="col-md-4" style="height: 100px;">
+                                 <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
+                                     <b>
+                                         {{product.name}}
+                                     </b>
+                                 </a>
+                                     <span>£{{product.price}}</span>
+                         </div>
+                     </div>-->
                 </div>
             </div>
         </div>
@@ -160,14 +192,7 @@
         </div>
         <div class="info">
 
-        <div class="row">
-            <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'">
-                <div class="thumbnail" style="height: 400px;">
-                    <div style="height: 180px; padding-top: 15px" >
-                        <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black" class="center-block"></div>
-                    <div class="caption">
-                        <h4 style="height: 80px;">{{place.location.all}}</h4>
-                        <p>Price £{{place.price.nightly}}</p>
+            <hr/>
 
             <div class="flight_info">
                 <div class="row">
@@ -205,14 +230,21 @@
                 </div>
             </div>
             <hr/>
-            <div class="row">
-                <div ng-repeat="place in accomodation.result" class="col-sm-6 col-md-4">
-                    <img ng-src="{{ place.photos[0].medium }}" alt="Image">
+<div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'" >
+                <div class="thumbnail" style="height: 400px;">
+                    <div style="height: 180px;">
+                        <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black; margin-top: 15px;" class="center-block"></div>
+                    <div class="caption">
+                        <h4 style="height: 80px;">{{place.location.all}}</h4>
+                        <p>Price £{{place.price.nightly}}</p>
 
-                    <span>{{ place.price.nightly }}</span>
+                        <span class="glyphicon glyphicon-star" ng-repeat="rating in place.rating"></span>
+                        <p><a ng-href="{{ place.provider.url }}" class="btn btn-primary confirm-btn" target="_blank" role="button">Book now!</a></p>
+                    </div>
                 </div>
             </div>
-
+        </div>
         </div>
 
     </div>
