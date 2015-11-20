@@ -8,7 +8,6 @@ from flask.ext.migrate import MigrateCommand
 
 from app.app import create_app
 
-from OpenSSL import SSL
 
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
