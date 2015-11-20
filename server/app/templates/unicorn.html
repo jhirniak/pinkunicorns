@@ -271,7 +271,7 @@
             <hr/>
 <div class="row">
             <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'" >
-                <div class="thumbnail" style="height: 400px;">
+                <div class="thumbnail" style="height: 415px;">
                     <div style="height: 180px;">
                         <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black; margin-top: 15px;" class="center-block"></div>
                     <div class="caption">
@@ -284,6 +284,14 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="button" ng-click="foodClick()" class="btn btn-warning" style="font-size: 2em;">
+                    <span class="glyphicon glyphicon-apple" aria-hidden="true"></span> Hungry?
+                </button>
+            </div>
         </div>
 
     </div>
@@ -383,6 +391,15 @@
                 </div>
             </div>
             <hr/>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="button" ng-click="foodClick()" class="btn btn-warning" style="font-size: 2em;">
+                    <span class="glyphicon glyphicon-apple" aria-hidden="true"></span> Hungry?
+                </button>
+            </div>
         </div>
 
     </div>

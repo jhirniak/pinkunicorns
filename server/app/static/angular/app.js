@@ -7,6 +7,12 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
         return $scope.visibility == x;
     };
 
+    $scope.foodClick = function () {
+        $scope.clear();
+        $scope.query = 'book me a table in San Francisco';
+        $scope.get_query();
+    };
+
     $scope.loading = false;
 
     //$sce.trustAsResourceUrl("https://maps.googleapis.com/maps/api/directions/json");
@@ -39,7 +45,9 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 
     $scope.get_query = function (event) {
     	$scope.hideError();
-        event.preventDefault();
+        if (event)  {
+            event.preventDefault();
+        }
         $scope.loading = true;
         $scope.visibility = '';
         $scope.longTravel = false;
