@@ -32,6 +32,13 @@
     margin-bottom: 20px;
     margin-top: 10px;
   }
+
+    .center2 {
+        width: 800px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
   </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
@@ -134,8 +141,8 @@
 <div class="container" ng-show="isVisible('travel')" id="hotel">
   <div class="jumbotron">
     <div class="map">
-      <iframe
-        width="400"
+      <iframe class="center2"
+        width="800"
         height="600"
         frameborder="0" style="border:0"
         ng-src="{{getRU}}"
