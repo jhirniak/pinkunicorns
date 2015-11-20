@@ -6,13 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Unicorn</title>
-    <style>
-    </style>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
     <!-- Bootstrap -->
     <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+
     <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -66,9 +65,14 @@
         //$.redirect('http://stojanowski.eu/pajacyk/login.html', {'a':1});
     }
 </script>
-
-<div class="center-block">
-    <h1 class="text-center" style="margin-top: 20%; font-size: 20em">Unicorn<span>X</span></h1>
+<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
+  <iframe frameborder="0" height="100%" width="100%" 
+    src="https://youtube.com/embed/Ix7vrluEm4E?autoplay=1&controls=0&showinfo=0&autohide=1">
+  </iframe>
+</div>
+<div style="position: fixed; z-index: 0; width: 100%; height: 100%; background: rgba(100,100,100,0.5)"></div>
+<div class="center-block" style="height: 35em; transform: translateY(20em); margin:auto;">
+    <h1 class="text-center" style="text-shadow: 2px 4px grey; font-size: 20em">Unicorn<span>X</span></h1>
     <div id="badresponse" style="color:red"></div>
     <div class="center-block" style="margin: auto; margin-top: 10%; width: 100px;">
     <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin="login();" data-scope="public_profile,email,user_friends,user_likes"></div>

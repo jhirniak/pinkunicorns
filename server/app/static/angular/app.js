@@ -43,13 +43,24 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
             }
 
 	      	$scope.accomodation = d["accomodation"];
+            $scope.accomodation.result = _.map($scope.accomodation.result, function (item) {
+                item.rating = _.range(Math.floor((Math.random() * 5) + 1));
+                return item;
+            });
+
 	      	$scope.travel = d["travel"];
 	      	$scope.visibility = "travel";
 	      	$scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=3');
 	      } else if(d["type"] == "birthdays") {
 	      	$scope.likes = Object.keys(d.products);
             $scope.name = d.name;
-            $scope.products = _.flatten(_.values(d.products));
+            products = _.flatten(_.values(d.products));
+            $scope.products = [];
+            for (var i = 0; i < products.length; i++) {
+            	if(products[i]["price"] != "" && products[i]["price"] > 0) {
+            		$scope.products.push(products[i]);
+            	}
+            }
             $scope.visibility = "birthdays";
 
                 } else if (d["type"] == "restaurant_booking") {
