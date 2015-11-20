@@ -1,4 +1,4 @@
-<html>
+<html ng-app="unicornX">
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -9,8 +9,8 @@
   <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
   <title>UnicornX</title>
 </head>
-<body onload="getProfile();" ng-app="unicornX">
-<div class="container" ng-controller="UnicornCtrl">
+<body onload="getProfile();" ng-controller="UnicornCtrl">
+<div class="container" >
   <div>
     <div id="wyjebmnie">
       <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
@@ -45,9 +45,13 @@
   }
 </script>
 
+{% raw %}
+
 <div ng-show="cat">
   Ready for travel, bitch?
 </div>
+
+{% endraw %}
 
 </body>
 </html>
