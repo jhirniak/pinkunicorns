@@ -12,47 +12,52 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-
-  <style>
-
-    .jumbotron > .map {
-      float: left;
-      width: 400px;
-      height: 100%;
-    }
-
-    .jumbotron > .info {
-      float: right;
-    }
-
-    #cleared {
-      clear: both;
-    }
-  </style>
-
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
+
 <div class="container">
 <div class="jumbotron">
-  <div class="map">
+
+  <h2 id="meeting">Where would you like to meet Konrad?</h2>
+  <a href="#uber">done</a><br>
+
+  <table><tr><td>
     <iframe
-      width="400"
-      height="600"
+      width="640"
+      height="480"
       frameborder="0" style="border:0"
       src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM
         &q=Space+Needle,Seattle+WA" allowfullscreen>
     </iframe>
-  </div>
-  <div class="info">
+  </td><td>
+    Filter by:
+    ...
+  </td></tr></table>
+
+  filter by type of food, price, etc.
+
+  <h2 id="uber">It's 30 minute walk to Space Needle, would you like to some lift?</h2>
+
+  <button type="button" class="btn btn-lg btn-success">Yes</button>
+  <button type="button" class="btn btn-lg btn-danger">No</button>
 
 
-
-    <hr>
-    <h2>Your reservation in Aloft Silicon Valley</h2>
-
-  </div>
-  <div id="cleared"></div>
 </div>
 </div>
+
+<script>
+$(function() {
+
+  $('a').click(function(){
+    $('html, body').animate({
+      scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 500);
+    return false;
+  });
+
+})
+</script>
+
 </body>
 </html>
