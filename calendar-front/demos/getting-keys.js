@@ -10,17 +10,18 @@ function getId(element) {
 var script = document.createElement('script');
 script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js";
 document.getElementsByTagName('head')[0].appendChild(script);
-setTimeout(200, function() {
-	var x = $('span.evt-lk').not('.chip-caption'); 
-	var y = Array(); 
+setTimeout(function() {
+	var hello = $('span.evt-lk').not('.chip-caption'); 
+	var hi = Array(); 
 	var ids = Array();
-	for (var i = 0; i < x.length; i++) { 
-		y.push({ "title": $(x.get(i)).text(), "id": getId($(x.get(i)))}); 
+	for (var i = 0; i < hello.length; i++) { 
+		hi.push({ "title": $(hello.get(i)).text(), "id": getId($(hello.get(i)))}); 
 	}
-	requestBody = JSON.stringify(y);
+	requestBody = JSON.stringify(hi);
 
-	for(var i = 0; i < y.length; i++) {
-		$('div.ca-evp'+y[i]['id']).append('<div>Hello!</div>');
+	//$.get("https://localhost/?query="+requestBody);
+
+	for(var i = 0; i < hi.length; i++) {
+		$($($('div.ca-evp'+hi[i]['id']).children().get(0)).children().get(0)).append("<div>xxx</div>");
 	}
-});
-//$().get request
+},200);
