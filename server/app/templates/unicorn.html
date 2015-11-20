@@ -1,60 +1,62 @@
 <html ng-app="unicornX">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script src="{{ url_for('static', filename='bower_components/angular-bootstrap/ui-bootstrap.min.js') }}"></script>
-    <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
-    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
-    <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
-    <script>
-        var authtoken = $.cookie("token");
-        window.authtoken = authtoken;
-    </script>
-    <style>
-        .cipa {
-            height: 80px;
-            width: 80px;
-            margin-bottom: 25px;
-        }
 
-        .lol-co {
-            margin-left: 10px;
-            height: 40px;
-            display: inline-block;
-        }
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="{{ url_for('static', filename='bower_components/angular-bootstrap/ui-bootstrap.min.js') }}"></script>
+  <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
+  <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
+  <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+  <script>
+    var authtoken = $.cookie("token");
+    window.authtoken = authtoken;
+  </script>
+  <style>
+    .cipa {
+      height: 80px;
+      width: 80px;
+      margin-bottom: 25px;
+    }
 
-        .center {
-            width: 64px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
+  .lol-co {
+      margin-left: 10px;
+      height: 40px;
+      display: inline-block;
+  }
 
-        .center2 {
-            width: 800px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+  .center {
+    width: 64px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
 
-    <script src="{{url_for('static', filename='angular/app.js')}}"></script>
+    .center2 {
+        width: 800px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  </style>
 
-    <title>UnicornX</title>
+  <script src="{{url_for('static', filename='angular/app.js')}}"></script>
 
-    <!-- LUBICIE TOSTY???!!11 -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <title>UnicornX</title>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!-- LUBICIE TOSTY???!!11 -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-    <script src="{{url_for('static', filename='jquery.toaster.js')}}"></script>
-    <!-- TOSTY SIE SKONCZYLY -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <script src="{{url_for('static', filename='jquery.toaster.js')}}"></script>
+  <!-- TOSTY SIE SKONCZYLY -->
 </head>
 <body onload="getProfile();" ng-controller="UnicornCtrl" style="margin-top: 50px;">
 <div class="container">
@@ -219,6 +221,13 @@
 
     </div>
     <div id="cleared"></div>
+</div>
+</div>
+</div>
+
+<div class="container" ng-show="restaurants" id="restaurants">
+<div class="jumbotron">
+  <div id="map" style="width: 900px; height: 720px;"></div>
 </div>
 </div>
 {% endraw %}

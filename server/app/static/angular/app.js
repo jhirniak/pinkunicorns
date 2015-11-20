@@ -1,24 +1,31 @@
-var app = angular.module('unicornX', ['ui.bootstrap']);
+var app = angular.module('unicornX', []);
 
 app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,$sce) {
     $scope.visibility = "";
 
-    $scope.isVisible = function(x) {
-    	return $scope.visibility == x;
+    $scope.isVisible = function (x) {
+        return $scope.visibility == x;
     };
 
     $scope.loading = false;
 
     //$sce.trustAsResourceUrl("https://maps.googleapis.com/maps/api/directions/json");
 
+
     $scope.message = "";
     $scope.query = "";
 
-    $scope.left  = function() { return 100 - $scope.message.length; };
-    $scope.clear = function() { $scope.message = ""; };
-    $scope.save  = function() { alert("Note Saved"); };
+    $scope.left = function () {
+        return 100 - $scope.message.length;
+    };
+    $scope.clear = function () {
+        $scope.message = "";
+    };
+    $scope.save = function () {
+        alert("Note Saved");
+    };
 
-    $scope.get_query = function(event) {
+    $scope.get_query = function (event) {
         event.preventDefault();
         $scope.loading = true;
     	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
@@ -44,27 +51,84 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
             $scope.name = d.name;
             $scope.products = _.flatten(_.values(d.products));
             $scope.visibility = "birthdays";
-	      } else if(d["type"] == "") {
-	      	
-	      }
-	    });
-    };
 
-    $scope.quornuj = function () {
-        console.log('Changed query to ' + $scope.query);
+                } else if (d["type"] == "restaurant_booking") {
+                    $scope.visibility = "restaurants";
+                    $scope.restaurants = d["restaurants"];
 
-        if ($scope.query.indexOf('travel') > -1) {
-            switchToHotel();
-        }
+                    var rect = {
+                        latMin: $scope.restaurants[0]['lat'],
+                        latMax: $scope.restaurants[0]['lat'],
+                        lngMin: $scope.restaurants[0]['lng'],
+                        lngMax: $scope.restaurants[0]['lng']
+                    };
 
-        console.log('cat is ', $scope.cat);
-    };
+                    $scope.restaurants.forEach(function (restaurant) {
+                        console.log('rest: ', restaurant);
+                        rect.latMin = Math.min(rect.latMin, restaurant['lat']);
+                        rect.latMax = Math.max(rect.latMax, restaurant['lat']);
+                        rect.lngMin = Math.min(rect.lngMin, restaurant['lng']);
+                        rect.lngMax = Math.max(rect.lngMax, restaurant['lng']);
+                    });
 
-    function switchToHotel() {
-        $scope.cat['hotel'] = true;
-        $.toaster({ priority : 'success', title : 'Title', message : 'Your message here'});
+                    console.log('Center rectangle: ', rect);
+                    console.log('Center lat: ', rect.latMax);
+                    console.log('Center lng: ', rect.lngMax);
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 10,
+                        center: new google.maps.LatLng( (rect.latMax + rect.latMin) / 2, (rect.lngMax + rect.lngMin) / 2),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+
+                    var infowindow = new google.maps.InfoWindow();
+
+                    var i = 0;
+
+                    $scope.restaurants.forEach(function (restaurant) {
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(restaurant['lat'], restaurant['lng']),
+                            map: map
+                        });
+
+                        var contentString = "<h3>" + restaurant['name'] + "</h3>" +
+                            "<h4>" + restaurant['address'] + "</h4>" +
+                            "<p>Phone: " + restaurant['phone'] + "</p>" +
+                            "<p><a href='" + restaurant['reserve_url'] + "'>Book a table</a></p>" +
+                            "<img src='" + restaurant['image_url'] + "' />" +
+                            "";
+
+                        google.maps.event.addListener(marker, 'click', (function(marker) {
+                            return function() {
+                                infowindow.setContent(contentString);
+                                infowindow.open(map, marker);
+                            }
+                        })(marker));
+                    });
+
+                } else if (d["type"] == "flights") {
+                    $scope.visibility = "flights";
+                }
+            }
+    );
+};
+
+$scope.quornuj = function () {
+    console.log('Changed query to ' + $scope.query);
+
+    if ($scope.query.indexOf('travel') > -1) {
+        switchToHotel();
     }
 
-    console.log('Controller ready');
+    console.log('cat is ', $scope.cat);
+};
 
-}]);
+function switchToHotel() {
+    $scope.cat['hotel'] = true;
+    $.toaster({priority: 'success', title: 'Title', message: 'Your message here'});
+}
+
+console.log('Controller ready');
+
+}])
+;
