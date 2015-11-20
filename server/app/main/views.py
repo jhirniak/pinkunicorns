@@ -6,7 +6,11 @@ from . import main
 
 @main.route("/")
 def hello():
-    return 'Server is running'
+    return render_template('index.html')
+
+@main.route("unicornx")
+def unicorn():
+	return render_template('unicorn.html')
 
 
 @main.route("frame/")

@@ -1,0 +1,77 @@
+<html ng-app="unicornApp">
+	<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>-->
+ <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">	
+ <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+	
+<script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
+		<title>UnicornX</title>
+	</head>
+	<body onload="getProfile();">
+		<div class="container">
+		  <div>
+		  	<div id="wyjebmnie">
+		    	<img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
+			</div>
+			<div class="page-header text-center">
+		    <h1><small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small></h1></div>
+		    <form action="#">
+			<input class="form-control text-center" style="font-size: 25px; height: 50px" type="text" onchange="change(this.value)" autofocus>
+			</form>
+		  </div>
+		</div>
+		<div id="herestuff"></div>
+		<script>
+		function change(value) {
+			$.get('/api/v1/jarvis?text='+value, function(d) {
+				$('#herestuff').text(d);
+                console.log(d);
+			});
+		}
+		   var events = [];
+            var authtoken = $.cookie("token");
+            function perm()
+            {
+                 $.getJSON("https://graph.facebook.com/me/permissions?access_token="+authtoken, function( info ) { console.log(info);
+                });        
+            }
+            function getEvent(id, data, fn)
+            {
+                $.getJSON("https://graph.facebook.com/"+id+"?access_token="+authtoken, function( info ) { fn(data, info);
+                });     
+            }
+            function getEvents(authtoken)
+            {
+                $.get("https://graph.facebook.com/me/events/created?access_token="+authtoken, function( data ) {
+                    console.log(data);
+                    console.log(data['data'].length+"==len");
+                    for(var i = 0; i < data['data'].length; i++)
+                    {
+                        getEvent(data['data'][i]['id'],data['data'][i], function(data,info){
+                            var eventinfo = {'id': data['id'], 'name': data['name'], 'owner_id':info['owner']['id'], 'owner_name':info['owner']['name']};
+                            events.push(eventinfo);
+                            $('#my_events').html($('#my_events').html() + eventTemplate(eventinfo));
+                        });
+
+                    }
+                });
+            } 
+            function eventTemplate(event)
+            {
+ 
+                return "<a href='getPlayList/"+event['id']+"' class='list-group-item'><span class='eventTitle'>"+event['name']+"</span></a>";
+            }
+            function getProfile()
+            {
+                perm();
+                $.get("https://graph.facebook.com/me?access_token="+authtoken, function( data ) {
+                    console.log(data);
+                    $('#my_name').html(data['name']);
+                    $('#my_profilepic').html("<img src='https://graph.facebook.com/"+data['id']+"/picture'>");
+                    getEvents(authtoken);//,function(events) {console.log(events);});
+                });
+            } 
+		</script>
+	</body>
+</html>
