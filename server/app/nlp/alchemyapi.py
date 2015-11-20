@@ -145,7 +145,7 @@ class AlchemyAPI:
         import sys
         try:
             # Open the key file and read the key
-            f = open("api_key.txt", "r")
+            #f = open("api_key.txt", "r")
             key = '348c0c522d11c4ea705d2100100e020e3b6ddb23' #f.read().strip()
 
             if key == '':
@@ -165,7 +165,7 @@ class AlchemyAPI:
                 self.apikey = key
 
             # Close file
-            f.close()
+            #f.close()
         except IOError:
             # The file doesn't exist, so show the message and create the file.
             print(

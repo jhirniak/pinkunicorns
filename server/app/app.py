@@ -16,6 +16,7 @@ def create_app(config_name):
 
     api = Api(app)
     api.add_resource(resources.Analyse, api_url + '/analyse')
+    api.add_resource(resources.RunTask, api_url + '/run')
 
     return app
 
