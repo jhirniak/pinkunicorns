@@ -1,6 +1,6 @@
 var app = angular.module('unicornX', []);
 
-app.controller("UnicornCtrl", ['$scope', function($scope) {
+app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
 
     $scope.cat = {
         'hotel': false
@@ -31,9 +31,7 @@ app.controller("UnicornCtrl", ['$scope', function($scope) {
     };
 
     console.log('Controller ready');
-}]);
 
-app.controller('BirthdayCtrl', function($http) {
     var bc = this;
     bc.isLoaded = false;
     bc.likes = [];
@@ -52,4 +50,4 @@ app.controller('BirthdayCtrl', function($http) {
             bc.isLoaded = true;
         });
     }
-});
+}]);
