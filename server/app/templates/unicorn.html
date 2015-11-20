@@ -45,21 +45,20 @@
   }
 </script>
 
-{% raw %}
+
 
 <div ng-show="cat">
   Ready for travel, bitch?
 </div>
 
 <div ng-controller="BirthdayCtrl as bc">
-    <button ng-click="bc.stuff()"></button>
     <div ng-show="bc.isLoaded">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {{ bc.name }} likes</h2>
+                <h2>We found that your friend {bc.name} likes</h2>
 
                 <h3>
-                <span ng-repeat="like in bc.likes" class="label label-primary">{{ like }}<span
+                <span ng-repeat="like in bc.likes" class="label label-primary">{like}<span
                         class="glyphicon glyphicon-remove" aria-hidden="true"
                         style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;"></span></span>
                 </h3>
@@ -71,8 +70,8 @@
                         <div id="DIV_1">
                             <div id="DIV_2">
                                 <div id="DIV_3">
-                                    <a href="{{ product.offer_url }}" target="_blank" id="A_4">
-                                        <img alt="Product Details" src="{{ product.image }}" id="IMG_5"/>
+                                    <a href="{product.offer_url}" target="_blank" id="A_4">
+                                        <img alt="Product Details" src="{product.image}" id="IMG_5"/>
                                     </a>
 
                                     <div id="DIV_6">
@@ -82,16 +81,16 @@
                         </div>
                         <div id="DIV_7">
                             <div id="DIV_8">
-                                <a title="{{ product.name }}" href="{{ product.offer_url }}" target="_blank" id="A_9">
+                                <a title="{product.name}" href="{product.offer_url}" target="_blank" id="A_9">
 
                                     <h2 id="H2_10">
-                                        {{ product.name }}
+                                        {product.name}
                                     </h2>
                                 </a>
                             </div>
                             <div id="DIV_11">
-                                <a href="{{ product.offer_url }}" target="_blank" id="A_12">
-                                    <span id="SPAN_13">£{{ product.price }}</span>
+                                <a href="{ product.offer_url }" target="_blank" id="A_12">
+                                    <span id="SPAN_13">£{ product.price }</span>
                                 </a>
                                 <i id="I_15"></i>
                             </div>
@@ -103,7 +102,6 @@
     </div>
 </div>
 
-{% endraw %}
 
 </body>
 </html>
