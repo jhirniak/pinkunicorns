@@ -49,8 +49,10 @@
         <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
       </h1>
     </div>
+
     <form action="#" ng-submit="get_query($event)" >
-      <input ng-model="query" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
+      <input ng-model="query" ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
+
     </form>
   </div>
 </div>
@@ -131,15 +133,16 @@
     </div>
 </div>
 
-<div class="container" ng-show="isVisible('travel')">
+
+<div class="container" ng-show="isVisible('travel')" id="hotel">
   <div class="jumbotron">
     <div class="map">
       <iframe
         width="400"
         height="600"
         frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM
-        &q=Space+Needle,Seattle+WA" allowfullscreen>
+        ng-src="{{getRU}}"
+        allowfullscreen>
       </iframe>
     </div>
     <div class="info">
@@ -153,7 +156,7 @@
     <div id="cleared"></div>
   </div>
 </div>
-
+</div>
 {% endraw %}
 
 </body>
