@@ -124,31 +124,39 @@ class Jarvis(restful.Resource):
         elif data['intent'] == 'travel':
             response = {'travel': {}}
 
-            rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
+            try:
+                rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
+            except:
+                return {'error': True};
             response['travel']['plan'] = rome2rio[0][0]
             response['travel']['places'] = rome2rio[1]
 
             pos = rome2rio[1][1]['pos'].split(',')
+            start = rome2rio[1][0]['pos'].split(',')
+
 
             if response['travel']['plan']['distance'] > 200:
                 airbnb = AirBnB()
                 response['accomodation'] = airbnb.get_accomodation(pos[0], pos[1])
-            else:
-                uber = Uber()
-
-                start = rome2rio[1][0]['pos'].split(',')
-
-                response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
 
                 cars = CarRental()
                 response['rental'] = cars.get_cars(start[0], start[1])
+            else:
+                uber = Uber()
+
+
+                response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
+
+
 
 
 
         elif data['intent'] == 'restaurant_booking':
             response = {}
-            response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
-
+            try:
+                response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
+            except:
+                return {'error': True};
 
 
         elif data['intent'] == 'flights':

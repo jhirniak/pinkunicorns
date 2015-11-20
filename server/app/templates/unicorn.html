@@ -15,6 +15,9 @@
     window.authtoken = authtoken;
   </script>
   <style>
+    .uber-text {
+      margin-top: 5px;
+    }
     .cipa {
       height: 80px;
       width: 80px;
@@ -46,6 +49,14 @@
          right: 25px;
          position: absolute;
      }
+
+      .uber {
+          padding-top: 35px;
+      }
+
+      .uber-btn {
+          margin-top: 5px;
+      }
   </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
@@ -64,15 +75,18 @@
 </head>
 <body onload="getProfile();" ng-controller="UnicornCtrl" style="margin-top: 50px;">
 <div class="container">
-    <div>
-        <div id="wyjebmnie">
-            <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
-        </div>
-        <div class="page-header text-center">
-            <h1>
-                <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
-            </h1>
-        </div>
+  <div>
+    <div id="wyjebmnie">
+      <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
+    </div>
+    <div id="wjebmnie" class="text-center" style="display:none;">
+        <h1 style="font-size: 10em">Unicorn<b>X</b></h1>
+    </div>
+    <div class="page-header text-center">
+      <h1>
+        <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
+      </h1>
+    </div>
 
         <form action="#" ng-submit="get_query($event)">
             <input ng-model="query" ng-change="quornuj()" class="form-control text-center"
@@ -227,20 +241,124 @@
                 </div>
             </div>
             <hr/>
-            <div class="row">
-                <div ng-repeat="place in accomodation.result" class="col-sm-6 col-md-4">
-                    <img ng-src="{{ place.photos[0].medium }}" alt="Image">
+<div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'" >
+                <div class="thumbnail" style="height: 400px;">
+                    <div style="height: 180px;">
+                        <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black; margin-top: 15px;" class="center-block"></div>
+                    <div class="caption">
+                        <h4 style="height: 80px;">{{place.location.all}}</h4>
+                        <p>Price £{{place.price.nightly}}</p>
 
-                    <span>{{ place.price.nightly }}</span>
+                        <span class="glyphicon glyphicon-star" ng-repeat="rating in place.rating"></span>
+                        <p><a ng-href="{{ place.provider.url }}" class="btn btn-primary confirm-btn" target="_blank" role="button">Book now!</a></p>
+                    </div>
                 </div>
             </div>
-
+        </div>
         </div>
 
     </div>
     <div id="cleared"></div>
 </div>
-</div>
+
+
+<div class="container" ng-show="isVisible('travel') && shortTravel" id="hotel">
+
+    <div class="jumbotron">
+        <div class="map">
+            <iframe class="center2"
+                    width="800"
+                    height="600"
+                    frameborder="0" style="border:0"
+                    ng-src="{{getRU}}"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="info">
+
+            <hr/>
+
+            <div class="flight_info">
+                <div class="row">
+                    <div class="col-sm-6 col-md-1">
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <h3 class="uber-text">Taxi</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">£</span>
+                            <input type="text" class="form-control"
+                                   placeholder="{{ travel.plan.indicativePrice.price }}"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon2"><span
+                                    class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.duration }}"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
+                                                                                     aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
+                    </div>
+                </div>
+
+                <hr style="border-color: #B5B5B5;">
+
+                <div class="row uber">
+                    <div class="col-sm-6 col-md-1">
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <h3 class="uber-text">Uber X</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">£</span>
+                            <input type="text" class="form-control"
+                                   placeholder="{{ taxi.prices[0].low_estimate }}"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon2"><span
+                                    class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ taxi.prices[0].duration }}"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
+                                                                                     aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ taxi.prices[0].distance }}m"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        </div>
+
+    </div>
+    <div id="cleared"></div>
 </div>
 
 <div class="container" ng-show="restaurants" id="restaurants">
@@ -258,7 +376,14 @@
   </div>
 </div>
 </div>
+<div class="text-center" style="display: none" id="error">
+    <h1>I am a Unicorn. I can't help you :(</h1>
+</div>
 {% endraw %}
-
+<div class="footer navbar-fixed-bottom" style="background: #dddddd;">
+  <div class="panel-body">
+    &copy; 2015 Unicorn<i>X</i>™ 🦄
+  </div>
+</div>
 </body>
 </html>
