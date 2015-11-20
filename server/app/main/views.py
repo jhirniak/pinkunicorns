@@ -25,7 +25,7 @@ def view_birthday():
 
     # display suggested presents with links
 
-    return render_template('birthday.html')
+    return render_template('angular/birthday.html')
 
 
 @main.route('view/travel', methods=['POST'])
