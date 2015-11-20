@@ -2,19 +2,19 @@
 	<head>
 		<script src="jquery.min.js"></script>
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>-->
-		<link href='bootstrap/css/bootstrap.css' rel='stylesheet' />
-		<link href='hmca.css' rel='stylesheet' />
-		<script src='bootstrap/js/bootstrap.min.js'></script>
-		<script src="jquery.cookie.js"></script>
+		<link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel='stylesheet' />
+		<script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
 		<title>UnicornX</title>
 	</head>
 	<body onload="getProfile();">
 		<div class="container">
-		  <div class="jumbotron">
+		  <div>
 		  	<div id="wyjebmnie">
 		    	<img src="unicorn.jpg" class="center-block cbi">
 			</div>
-		    <p class="text-center">Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</p>
+			<div class="page-header text-center">
+		    <h1><small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small></h1></div>
 		    <form action="#">
 			<input class="form-control text-center" style="font-size: 25px; height: 50px" type="text" onchange="change(this.value)" autofocus>
 			</form>
