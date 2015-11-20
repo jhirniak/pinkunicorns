@@ -2,7 +2,9 @@ var app = angular.module('unicornX', []);
 
 app.controller("UnicornCtrl", ['$scope', function($scope) {
 
-    $scope.cat = false;
+    $scope.cat = {
+        'hotel': false
+    };
 
     $scope.message = "";
     $scope.query = "";
@@ -20,7 +22,11 @@ app.controller("UnicornCtrl", ['$scope', function($scope) {
 
     $scope.quornuj = function () {
         console.log('Changed query to ' + $scope.query);
-        $scope.cat = !$scope.cat;
+
+        if ($scope.query.indexOf('travel') > -1) {
+            $scope.cat['hotel'] = true;
+        }
+
         console.log('cat is ', $scope.cat);
     };
 
