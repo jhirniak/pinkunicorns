@@ -7,6 +7,8 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
     	return $scope.visibility == x;
     };
 
+    $scope.loading = false;
+
     //$sce.trustAsResourceUrl("https://maps.googleapis.com/maps/api/directions/json");
 
     
@@ -19,8 +21,10 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 
     $scope.get_query = function(event) {
         event.preventDefault();
+        $scope.loading = true;
     	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
             .then(function (resp) {
+                $scope.loading = false;
           var d = resp.data;
 	      console.log(d);
 	      alert(d["type"]);
