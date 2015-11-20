@@ -15,8 +15,15 @@ app.controller("UnicornCtrl", ['$scope', function($scope) {
 
     $scope.get_query = function() {
     	$.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken, function (d) {
-	      $('#herestuff').html(d);
+	      //$('#herestuff').html(d);
 	      console.log(d);
+	      if(d["type"] == "travel") {
+
+	      } else if(d["type"] == "birthdays") {
+
+	      } else if(d["type"] == "") {
+	      	
+	      }
 	    });
     };
 
