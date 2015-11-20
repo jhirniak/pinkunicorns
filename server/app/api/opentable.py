@@ -5,7 +5,6 @@ API_URL = 'http://opentable.herokuapp.com/api/'
 
 def get_restaurants(city, address, zip, country=None):
     params = {
-        'address': address,
         'country': country or 'US',
     }
 
@@ -15,6 +14,10 @@ def get_restaurants(city, address, zip, country=None):
     if zip:
         params['zip'] = zip
 
-    response = get(API_URL + 'restaurant', params=params)
+    response = get(API_URL + 'restaurants', params=params)
 
-    return response.json().restaurants
+    return response.json()['restaurants']
+
+
+if __name__ == '__main__':
+    print get_restaurants('san francisco', None, None, None)
