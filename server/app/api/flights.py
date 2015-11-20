@@ -7,7 +7,7 @@ class InspiredFlights:
     def where_can_i_fly(self, origin, budget):
         resp = self.flights.inspiration_search(
             origin=origin,
-            departure_date="2015-11-25--2015-11-30",
+            departure_date="2015-11-20--2015-11-22",
             max_price=budget)
 
         return resp
