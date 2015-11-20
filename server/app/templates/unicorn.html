@@ -1,5 +1,6 @@
 <html ng-app="unicornX">
 <head>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <script src="{{ url_for('static', filename='bower_components/angular-bootstrap/ui-bootstrap.min.js') }}"></script>
@@ -63,6 +64,7 @@
 </head>
 <body onload="getProfile();" ng-controller="UnicornCtrl" style="margin-top: 50px;">
 <div class="container">
+<<<<<<< HEAD
   <div>
     <div id="wyjebmnie">
       <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
@@ -75,30 +77,42 @@
         <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
       </h1>
     </div>
+=======
+    <div>
+        <div id="wyjebmnie">
+            <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
+        </div>
+        <div class="page-header text-center">
+            <h1>
+                <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
+            </h1>
+        </div>
+>>>>>>> 154c97c26d504c1d5e50faa24bce956c58f3f06a
 
-    <form action="#" ng-submit="get_query($event)" >
-      <input ng-model="query" ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
+        <form action="#" ng-submit="get_query($event)">
+            <input ng-model="query" ng-change="quornuj()" class="form-control text-center"
+                   style="font-size: 25px; height: 50px" type="text" autofocus>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 <div id="herestuff"></div>
 <script>
-  var events = [];
-  function perm() {
-    $.getJSON("https://graph.facebook.com/me/permissions?access_token=" + authtoken, function (info) {
-      console.log(info);
-    });
-  }
-  function getProfile() {
-    perm();
-    $.get("https://graph.facebook.com/me?access_token=" + authtoken, function (data) {
-      console.log(data);
-      $('#my_name').html(data['name']);
-      $('#my_profilepic').html("<img src='https://graph.facebook.com/" + data['id'] + "/picture'>");
-      //getEvents(authtoken);//,function(events) {console.log(events);});
-    });
-  }
+    var events = [];
+    function perm() {
+        $.getJSON("https://graph.facebook.com/me/permissions?access_token=" + authtoken, function (info) {
+            console.log(info);
+        });
+    }
+    function getProfile() {
+        perm();
+        $.get("https://graph.facebook.com/me?access_token=" + authtoken, function (data) {
+            console.log(data);
+            $('#my_name').html(data['name']);
+            $('#my_profilepic').html("<img src='https://graph.facebook.com/" + data['id'] + "/picture'>");
+            //getEvents(authtoken);//,function(events) {console.log(events);});
+        });
+    }
 </script>
 
 <div ng-show="loading" class="center">
@@ -112,18 +126,20 @@
             <div class="jumbotron present">
                 <h2>We found that your friend {{name}} likes</h2>
 
-                <h3><div class="row">
-                    <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
-               <div ng-repeat="like in likes" class="lol-co">
+                <h3>
+                    <div class="row">
+                        <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
+                        <div ng-repeat="like in likes" class="lol-co">
                <span class="label label-primary">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                        style="font-size:.8em; ">
+                          style="font-size:.8em; ">
                        {{like}}
-                    </span></span></div></div>
+                    </span></span></div>
+                    </div>
                 </h3>
 
                 <h2>... so we thought that these are good present ideas:</h2>
-                    <div class="row">
+            <div class="row">
                         <div class="col-sm-6 col-md-4" ng-repeat="product in products" >
     <div class="thumbnail" style="height: 350px;">
         <div style="height: 150px;">
@@ -135,43 +151,26 @@
       </div>
     </div>
   </div>
-                   <!-- <div 
-                        style="padding: 10px;">
-                        <div class="col-md-2" style="height: 100px;">
-                            <a href="{{ product.offer_url }}" target="_blank">
-                                <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
-                            </a>
-                        </div>
-                        <div class="col-md-4" style="height: 100px;">
-                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
-                                    <b>
-                                        {{product.name}}
-                                    </b>
-                                </a>                      
-                                    <span>£{{product.price}}</span>
-                        </div>
-                    </div>-->
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
 
 
 <div class="container" ng-show="isVisible('travel') && longTravel" id="hotel">
-  <div class="jumbotron">
-    <div class="map">
-      <iframe class="center2"
-        width="800"
-        height="600"
-        frameborder="0" style="border:0"
-        ng-src="{{getRU}}"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="info">
 
-      <hr>
+    <div class="jumbotron">
+        <div class="map">
+            <iframe class="center2"
+                    width="800"
+                    height="600"
+                    frameborder="0" style="border:0"
+                    ng-src="{{getRU}}"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="info">
 
         <div class="row">
             <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'">
@@ -182,46 +181,69 @@
                         <h4 style="height: 80px;">{{place.location.all}}</h4>
                         <p>Price £{{place.price.nightly}}</p>
 
-                        <span class="glyphicon glyphicon-star" ng-repeat="rating in place.rating"></span>
-                        <p><a ng-href="{{ place.provider.url }}" class="btn btn-primary confirm-btn" target="_blank" role="button">Book now!</a></p>
+            <div class="flight_info">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">£</span>
+                            <input type="text" class="form-control"
+                                   placeholder="{{ travel.plan.indicativePrice.price }}"
+                                   aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon2"><span
+                                    class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.duration }}"
+                                   aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon3">@</span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.name }}"
+                                   aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
+                                                                                     aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m"
+                                   aria-describedby="sizing-addon1" disabled>
+                        </div>
                     </div>
                 </div>
             </div>
+            <hr/>
+            <div class="row">
+                <div ng-repeat="place in accomodation.result" class="col-sm-6 col-md-4">
+                    <img ng-src="{{ place.photos[0].medium }}" alt="Image">
+
+                    <span>{{ place.price.nightly }}</span>
+                </div>
+            </div>
+
         </div>
 
     </div>
     <div id="cleared"></div>
-  </div>
 </div>
-
-<div class="container" ng-show="isVisible('travel') && shortTravel" id="hotel">
-  <div class="jumbotron">
-    <div class="map">
-      <iframe class="center2"
-        width="800"
-        height="600"
-        frameborder="0" style="border:0"
-        ng-src="{{getRU}}"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="info">
-
-      <hr>
-
-        <div class="row">
-            Short Travel
-        </div>
-
-    </div>
-    <div id="cleared"></div>
-  </div>
 </div>
 </div>
 
 <div class="container" ng-show="restaurants" id="restaurants">
 <div class="jumbotron">
   <div id="map" style="width: 900px; height: 720px;"></div>
+  <ol>
+    <li ng-repeat="restaurant in restaurants">
+      <a href="{{ restaurant['reserve_url'] }}">
+        {{ restaurant['name'] }}
+        {{ toDollars(restaurant['price']) }}
+      </a>
+    </li>
+  </ol>
 </div>
 </div>
 {% endraw %}

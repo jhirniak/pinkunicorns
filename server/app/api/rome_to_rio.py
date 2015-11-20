@@ -46,3 +46,8 @@ def get_rome_rio(from_name, to_name, preview=False):
 
     return routes, places
     # return render_template('route.html', routes=routes, preview=preview, places=places)
+
+
+
+if __name__ == '__main__':
+    print get_rome_rio('san francisco', 'london')

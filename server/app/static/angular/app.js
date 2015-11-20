@@ -143,6 +143,10 @@ function switchToHotel() {
     $.toaster({priority: 'success', title: 'Title', message: 'Your message here'});
 }
 
+$scope.toDollars = function toDollars(n) {
+    return Array(n).join("$");
+};
+
 console.log('Controller ready');
 
 }])

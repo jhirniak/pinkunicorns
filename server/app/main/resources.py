@@ -129,19 +129,22 @@ class Jarvis(restful.Resource):
             response['travel']['places'] = rome2rio[1]
 
             pos = rome2rio[1][1]['pos'].split(',')
+            start = rome2rio[1][0]['pos'].split(',')
+
 
             if response['travel']['plan']['distance'] > 200:
                 airbnb = AirBnB()
                 response['accomodation'] = airbnb.get_accomodation(pos[0], pos[1])
-            else:
-                uber = Uber()
-
-                start = rome2rio[1][0]['pos'].split(',')
-
-                response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
 
                 cars = CarRental()
                 response['rental'] = cars.get_cars(start[0], start[1])
+            else:
+                uber = Uber()
+
+
+                response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
+
+
 
 
 
