@@ -1,4 +1,4 @@
-from flask import request, send_from_directory
+from flask import render_template
 from . import main
 
 
@@ -7,9 +7,7 @@ def hello():
     return 'Server is running'
 
 
-@main.route('extension/', methods=['POST'])
-def extension():
-
-    import ipdb; ipdb.set_trace()
-    return '', 201
+@main.route("frame/")
+def frame():
+    return render_template('frame.html')
 
