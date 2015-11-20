@@ -1,95 +1,96 @@
 <html ng-app="unicornX">
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
-  <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
-  <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
-  <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
-  <script>
-    var authtoken = $.cookie("token");
-    window.authtoken = authtoken;
-  </script>
-  <style>
-    .cipa {
-      height: 80px;
-      width: 80px;
-      margin-bottom: 25px;
-    }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
+    <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
+    <script>
+        var authtoken = $.cookie("token");
+        window.authtoken = authtoken;
+    </script>
+    <style>
+        .cipa {
+            height: 80px;
+            width: 80px;
+            margin-bottom: 25px;
+        }
 
-  .lol-co {
-      margin-left: 10px;
-      height: 40px;
-      display: inline-block;
-  }
+        .lol-co {
+            margin-left: 10px;
+            height: 40px;
+            display: inline-block;
+        }
 
-  .center {
-    width: 64px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
+        .center {
+            width: 64px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
 
-    .center2 {
-        width: 800px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-  </style>
+        .center2 {
+            width: 800px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 
-  <script src="{{url_for('static', filename='angular/app.js')}}"></script>
+    <script src="{{url_for('static', filename='angular/app.js')}}"></script>
 
-  <title>UnicornX</title>
+    <title>UnicornX</title>
 
-  <!-- LUBICIE TOSTY???!!11 -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- LUBICIE TOSTY???!!11 -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-  <script src="{{url_for('static', filename='jquery.toaster.js')}}"></script>
-  <!-- TOSTY SIE SKONCZYLY -->
+    <script src="{{url_for('static', filename='jquery.toaster.js')}}"></script>
+    <!-- TOSTY SIE SKONCZYLY -->
 </head>
 <body onload="getProfile();" ng-controller="UnicornCtrl" style="margin-top: 50px;">
 <div class="container">
-  <div>
-    <div id="wyjebmnie">
-      <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
-    </div>
-    <div class="page-header text-center">
-      <h1>
-        <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
-      </h1>
-    </div>
+    <div>
+        <div id="wyjebmnie">
+            <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
+        </div>
+        <div class="page-header text-center">
+            <h1>
+                <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
+            </h1>
+        </div>
 
-    <form action="#" ng-submit="get_query($event)" >
-      <input ng-model="query" ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
+        <form action="#" ng-submit="get_query($event)">
+            <input ng-model="query" ng-change="quornuj()" class="form-control text-center"
+                   style="font-size: 25px; height: 50px" type="text" autofocus>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 <div id="herestuff"></div>
 <script>
-  var events = [];
-  function perm() {
-    $.getJSON("https://graph.facebook.com/me/permissions?access_token=" + authtoken, function (info) {
-      console.log(info);
-    });
-  }
-  function getProfile() {
-    perm();
-    $.get("https://graph.facebook.com/me?access_token=" + authtoken, function (data) {
-      console.log(data);
-      $('#my_name').html(data['name']);
-      $('#my_profilepic').html("<img src='https://graph.facebook.com/" + data['id'] + "/picture'>");
-      //getEvents(authtoken);//,function(events) {console.log(events);});
-    });
-  }
+    var events = [];
+    function perm() {
+        $.getJSON("https://graph.facebook.com/me/permissions?access_token=" + authtoken, function (info) {
+            console.log(info);
+        });
+    }
+    function getProfile() {
+        perm();
+        $.get("https://graph.facebook.com/me?access_token=" + authtoken, function (data) {
+            console.log(data);
+            $('#my_name').html(data['name']);
+            $('#my_profilepic').html("<img src='https://graph.facebook.com/" + data['id'] + "/picture'>");
+            //getEvents(authtoken);//,function(events) {console.log(events);});
+        });
+    }
 </script>
 
 <div ng-show="loading" class="center">
@@ -101,73 +102,111 @@
     <div ng-show="isVisible('birthdays')">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {{name}} likes</h2>
+                <h2>We found that your friend, {{name}} likes</h2>
 
-                <h3><div class="row">
-                    <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
-               <div ng-repeat="like in likes" class="lol-co">
+                <h3>
+                    <div class="row">
+                        <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
+                        <div ng-repeat="like in likes" class="lol-co">
                <span class="label label-primary">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                        style="font-size:.8em; ">
+                          style="font-size:.8em; ">
                        {{like}}
-                    </span></span></div></div>
+                    </span></span></div>
+                    </div>
                 </h3>
 
-                <h2>... so we thought that these are good present ideas:</h2>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4" ng-repeat="product in products" >
-    <div class="thumbnail" style="height: 350px;">
-        <div style="height: 150px;">
-      <img src="{{product.image}}" alt="Image" class="center-block"></div>
-      <div class="caption">
-        <h4 style="height: 80px;">{{product.name}}</h4>
-        <p>£{{product.price}}</p>
-        <p><a href="{{product.offer_url}}" class="btn btn-primary" target="_blank" role="button">Get it now!</a></p>
-      </div>
-    </div>
-  </div>
-                   <!-- <div 
-                        style="padding: 10px;">
-                        <div class="col-md-2" style="height: 100px;">
-                            <a href="{{ product.offer_url }}" target="_blank">
-                                <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
-                            </a>
+                <h2>... so we thought that these are good gift ideas:</h2>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-4" ng-repeat="product in products">
+                        <div class="thumbnail" style="height: 350px;">
+                            <div style="height: 150px;">
+                                <img src="{{product.image}}" alt="Image" class="center-block"></div>
+                            <div class="caption">
+                                <h4 style="height: 80px;">{{product.name}}</h4>
+
+                                <p>£{{product.price}}</p>
+
+                                <p><a href="{{product.offer_url}}" class="btn btn-primary" target="_blank"
+                                      role="button">Get it now!</a></p>
+                            </div>
                         </div>
-                        <div class="col-md-4" style="height: 100px;">
-                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
-                                    <b>
-                                        {{product.name}}
-                                    </b>
-                                </a>                      
-                                    <span>£{{product.price}}</span>
-                        </div>
-                    </div>-->
+                    </div>
+                    <!-- <div
+                         style="padding: 10px;">
+                         <div class="col-md-2" style="height: 100px;">
+                             <a href="{{ product.offer_url }}" target="_blank">
+                                 <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
+                             </a>
+                         </div>
+                         <div class="col-md-4" style="height: 100px;">
+                                 <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
+                                     <b>
+                                         {{product.name}}
+                                     </b>
+                                 </a>
+                                     <span>£{{product.price}}</span>
+                         </div>
+                     </div>-->
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </div>
 
 
 <div class="container" ng-show="isVisible('travel')" id="hotel">
-  <div class="jumbotron">
-    <div class="map">
-      <iframe class="center2"
-        width="800"
-        height="600"
-        frameborder="0" style="border:0"
-        ng-src="{{getRU}}"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="info">
+    <div class="jumbotron">
+        <div class="map">
+            <iframe class="center2"
+                    width="800"
+                    height="600"
+                    frameborder="0" style="border:0"
+                    ng-src="{{getRU}}"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="info">
 
-      <hr>
-      <h2>Your reservation in Aloft Silicon Valley</h2>
+            <hr>
 
+            <div class="flight_info">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">£</span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.indicativePrice.price }}" aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.duration }}" aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon3">@</span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.name }}" aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m" aria-describedby="sizing-addon1" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Your reservation in Aloft Silicon Valley</h2>
+
+        </div>
+
+
+        <div id="cleared"></div>
     </div>
-    <div id="cleared"></div>
-  </div>
 </div>
 </div>
 {% endraw %}
