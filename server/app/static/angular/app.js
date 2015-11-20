@@ -119,6 +119,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 
                 } else if (d["type"] == "flights") {
                     $scope.visibility = "flights";
+                    console.log('DATAA', d);
                 }
             }
     );
