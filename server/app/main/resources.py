@@ -127,7 +127,7 @@ class Jarvis(restful.Resource):
             try:
                 rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
             except:
-                return "<h3>Sorry, I can't help you. I am a Unicorn</h3>";
+                return {'error': True};
             response['travel']['plan'] = rome2rio[0][0]
             response['travel']['places'] = rome2rio[1]
 
@@ -153,8 +153,10 @@ class Jarvis(restful.Resource):
 
         elif data['intent'] == 'restaurant_booking':
             response = {}
-            response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
-
+            try:
+                response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
+            except:
+                return {'error': True};
 
 
         elif data['intent'] == 'flights':

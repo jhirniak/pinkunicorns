@@ -25,18 +25,30 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
         alert("Note Saved");
     };
 
+    $scope.showError = function() {
+    	$('#error').fadeIn();
+    };
+
+    $scope.hideError = function() {
+    	$('#error').fadeIn();
+    };
+
     $scope.get_query = function (event) {
         event.preventDefault();
         $scope.loading = true;
     	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
             .then(function (resp) {
-            	$('#wyjebmnie').slideUp(1000, function() {
-            		
-            	});
+            	$('#wyjebmnie').slideUp(1000);
             	$('#wjebmnie').slideDown(1000);
                 $scope.loading = false;
           var d = resp.data;
 	      console.log(d);
+	      if(d["error"]) {
+	      	$scope.showError();
+	      	$sope.visibility = "";
+	      } else {
+	      	$scope.hideError();
+	      }
 	      if(d["type"] == "travel") {
             if(_.has(d, 'accomodation')) {
               $scope.longTravel = true;
