@@ -11,11 +11,10 @@ app.controller("unicornCtrl", function($scope) {
 	      $('#herestuff').html(d);
 	      console.log(d);
 	    });
-    }
+    };
 
-    $scope.$watch("query", function(newValue, oldValue) {
-    if (newValue != oldValue) {
-      get_query();
-    }
-  });
+    $scope.quornuj = function () {
+        alert('Changed', $scope.query);
+    };
+
 });
