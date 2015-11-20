@@ -15,6 +15,20 @@ import os.path
 from app.api.rentals import CarRental
 
 
+class Airport(object):
+
+    def __init__(self, row):
+        self.code = row[0]
+        self.airportName = row[1]
+        self.nearestCity = row[2]
+        self.country = row[3]
+        self.countryCode = row[4]
+        self.geoloc = {
+            'lat': row[5],
+            'lng': row[6]
+        }
+
+
 class Analyse(restful.Resource):
     def get(self):
         parser = reqparse.RequestParser()
@@ -73,6 +87,7 @@ class Jarvis(restful.Resource):
         self.cache = {}
 
         self.load_cache()
+        self.load_codes()
 
     def save_cache(self):
         f = open('cache.json', 'w+')
@@ -86,6 +101,15 @@ class Jarvis(restful.Resource):
             f.close()
         else:
             self.cache = {}
+
+    def load_codes(self):
+        import json
+
+        if os.path.exists('acodes.json'):
+            with open('acodes.json') as fh:
+                self.codes = json.load(fh)
+        else:
+            self.codes = {}
 
     def get(self):
         parser = reqparse.RequestParser()
@@ -169,6 +193,10 @@ class Jarvis(restful.Resource):
 
 
         response['type'] = data['intent']
+        response['codes'] = self.codes
+
+        import json
+        # TODO
 
         self.cache[args['text'].lower()] = response
         self.save_cache()

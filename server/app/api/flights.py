@@ -29,14 +29,13 @@ class InspiredFlights:
 
         return resp
 
-    def get_acodes(self):
+    def get_codes(self):
         with open('acodes.pickle') as fh:
-            acodes = pickle.load(fh)
-            print "GEO", acodes['SFO'].geoloc
-            return acodes
-
+            import pickle
+            codes = pickle.load(fh)
+            return codes
 
 if __name__ == '__main__':
     flights = InspiredFlights()
     print flights.where_can_i_fly('SFO', 300)
-    print flights.get_acodes()['SFO'].geoloc
+    print flights.get_codes()

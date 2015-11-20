@@ -49,7 +49,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 	      console.log(d);
 	      if(d["error"]) {
 	      	$scope.showError();
-	      	$sope.visibility = "";
+	      	$scope.visibility = "";
 	      } else {
 	      	$scope.hideError();
 	      }
@@ -139,8 +139,53 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
                     });
 
                 } else if (d["type"] == "flights") {
+              $scope.ppFlights = [];
                     $scope.visibility = "flights";
                     console.log('DATAA', d);
+              $scope.flights = d["flights"];
+              $scope.codes = d["codes"];
+
+              var map = new google.maps.Map(document.getElementById('mapa'), {
+                  zoom: 2,
+                  center: new google.maps.LatLng( 0, 0),
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+              });
+
+              var infowindow = new google.maps.InfoWindow();
+
+              var i = 0;
+
+              console.log('AA', $scope.flights);
+
+              $scope.flights.results.forEach(function (restaurant) {
+                  var destAirport = $scope.codes[restaurant.destination].airportName;
+                  var geoloc = $scope.codes[restaurant.destination]['geoloc'];
+
+                  $scope.ppFlights.push({
+                      'price':restaurant["price"],
+                      'airline':restaurant["airline"],
+                      'destination': destAirport
+                  });
+
+                  console.log('RR', restaurant);
+                  marker = new google.maps.Marker({
+                      position: new google.maps.LatLng(geoloc['lat'], geoloc['lng']),
+                      map: map
+                  });
+
+                  var contentString = "<h2>For $" + restaurant["price"] + "</h2>" +
+                      "<h2>Airline: " + restaurant["airline"] + "</h2>" +
+                      "<h2>Destination: " + destAirport + "</h2>" ;
+
+                  console.log('Added', contentString);
+
+                  google.maps.event.addListener(marker, 'click', (function(marker) {
+                      return function() {
+                          infowindow.setContent(contentString);
+                          infowindow.open(map, marker);
+                      }
+                  })(marker));
+              });
                 }
             }
     );
