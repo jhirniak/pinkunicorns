@@ -1,12 +1,7 @@
 var app = angular.module('unicornX', []);
 
 app.controller("UnicornCtrl", ['$scope', function($scope) {
-    $scope.categories = {};
-    $scope.categories['travel'] = false;
-
-    function isCatVis(cat) {
-        return $scope.categories[cat];
-    }
+    $scope.cat = true;
 
     $scope.message = "";
     $scope.query = "";
@@ -24,7 +19,8 @@ app.controller("UnicornCtrl", ['$scope', function($scope) {
 
     $scope.quornuj = function () {
         console.log('Changed query to ' + $scope.query);
-        $scope.travel = !$scope.travel;
+        $scope.cat = !$scope.cat;
+        console.log('new cat: ' + $scope.cat);
     };
 
     console.log('Controller ready');
