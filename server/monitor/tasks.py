@@ -1,7 +1,7 @@
 from celery import Celery
 
 
-app = Celery('tasks', broker='amqp://monitor@162.243.249.145//')
+app = Celery('tasks', broker='amqp://guest@162.243.249.145//')
 
 
 @app.task
