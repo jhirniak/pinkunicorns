@@ -8,6 +8,7 @@
   <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
   <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
   <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
   <script>
     var authtoken = $.cookie("token");
     window.authtoken = authtoken;
@@ -40,6 +41,10 @@
         margin-left: auto;
         margin-right: auto;
     }
+     .confirm-btn {
+         right: 25px;
+         position: absolute;
+     }
   </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
@@ -166,17 +171,56 @@
       <hr>
 
         <div class="row">
-          <div ng-repeat="place in accomodation.result" class="col-sm-6 col-md-4">
-              <img ng-src="{{ place.photos[0].medium }}" alt="Image">
+            <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'" >
+                <div class="thumbnail" style="height: 400px;">
+                    <div style="height: 180px;">
+                        <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black" class="center-block"></div>
+                    <div class="caption">
+                        <h4 style="height: 80px;">{{place.location.all}}</h4>
+                        <p>Price £{{place.price.nightly}}</p>
 
-              <span>{{ place.price.nightly }}</span>
+                        <span class="glyphicon glyphicon-star" ng-repeat="rating in place.rating"></span>
+                        <p><a ng-href="{{ place.provider.url }}" class="btn btn-primary confirm-btn" target="_blank" role="button">Book now!</a></p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
 
     </div>
     <div id="cleared"></div>
   </div>
+</div>
+
+
+<div class="container" ng-show="isVisible('travel') && shortTravel" id="hotel">
+  <div class="jumbotron">
+    <div class="map">
+      <iframe class="center2"
+        width="800"
+        height="600"
+        frameborder="0" style="border:0"
+        ng-src="{{getRU}}"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="info">
+
+      <hr>
+
+        <div class="row">
+            Short Travel
+        </div>
+
+    </div>
+    <div id="cleared"></div>
+  </div>
+</div>
+</div>
+
+<div class="container" ng-show="restaurants" id="restaurants">
+<div class="jumbotron">
+  <div id="map" style="width: 900px; height: 720px;"></div>
+</div>
 </div>
 {% endraw %}
 
