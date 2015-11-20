@@ -12,6 +12,7 @@ from app.api.taxi import Uber
 from app.api.opentable import *
 from app.api.flights import InspiredFlights
 import os.path
+from app.api.rentals import CarRental
 
 
 class Analyse(restful.Resource):
@@ -138,6 +139,9 @@ class Jarvis(restful.Resource):
                 start = rome2rio[1][0]['pos'].split(',')
 
                 response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
+
+                cars = CarRental()
+                response['rental'] = cars.get_cars(start[0], start[1])
 
 
 
