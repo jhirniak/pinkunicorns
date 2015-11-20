@@ -15,6 +15,9 @@
     window.authtoken = authtoken;
   </script>
   <style>
+    .uber-text {
+      margin-top: 5px;
+    }
     .cipa {
       height: 80px;
       width: 80px;
@@ -49,6 +52,10 @@
 
       .uber {
           padding-top: 35px;
+      }
+
+      .uber-btn {
+          margin-top: 5px;
       }
   </style>
 
@@ -277,7 +284,7 @@
                     <div class="col-sm-6 col-md-1">
                     </div>
                     <div class="col-sm-6 col-md-2">
-                        <h3>Taxi</h3>
+                        <h3 class="uber-text">Taxi</h3>
                     </div>
                     <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
@@ -305,17 +312,17 @@
                     </div>
 
                     <div class="col-sm-6 col-md-3">
-                        <button type="submit" class="btn btn-primary">Book Now!</button>
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
                     </div>
                 </div>
 
-                <hr style="border: solid 1px black">
+                <hr style="border-color: #B5B5B5;">
 
                 <div class="row uber">
                     <div class="col-sm-6 col-md-1">
                     </div>
                     <div class="col-sm-6 col-md-2">
-                        <h3>Uber X</h3>
+                        <h3 class="uber-text">Uber X</h3>
                     </div>
                     <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
@@ -329,7 +336,7 @@
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon2"><span
                                     class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
-                            <input type="text" class="form-control" placeholder="{{ taxi.prices[0].duration / 60 }}"
+                            <input type="text" class="form-control" placeholder="{{ taxi.prices[0].duration }}"
                                    aria-describedby="sizing-addon1" >
                         </div>
                     </div>
@@ -343,7 +350,7 @@
                     </div>
 
                     <div class="col-sm-6 col-md-3">
-                        <button type="submit" class="btn btn-primary">Book Now!</button>
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
                     </div>
                 </div>
             </div>

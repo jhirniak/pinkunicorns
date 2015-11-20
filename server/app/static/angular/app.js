@@ -57,6 +57,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
             } else {
               $scope.shortTravel = true;
               console.log('short');
+              $scope.taxi = d["taxi"];
               $scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=11');
             }
 	      } else if(d["type"] == "birthdays") {
