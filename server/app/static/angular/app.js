@@ -14,7 +14,8 @@ app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
     $scope.clear = function() {$scope.message = "";};
     $scope.save  = function() {alert("Note Saved");};
 
-    $scope.get_query = function() {
+    $scope.get_query = function(event) {
+        event.preventDefault();
     	$.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken, function (d) {
 	      console.log(d);
 	      if(d["type"] == "travel") {
