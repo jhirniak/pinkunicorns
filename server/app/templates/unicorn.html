@@ -65,6 +65,7 @@
 
 
 {% raw %}
+<!-- BIRTHDAY VIEWS -->
 <div>
     <div ng-show="isVisible('birthdays')">
         <div class="container">
@@ -117,8 +118,9 @@
         </div>
     </div>
 </div>
+<!-- END BIRTHDAY VIEWS -->
 
-
+<!-- HOTEL VIEWS -->
 <div class="container" ng-show="cat['hotel']" id="hotel">
   <div class="jumbotron">
     <div class="map">
@@ -142,6 +144,41 @@
   </div>
 </div>
 </div>
+
+<!-- END HOTEL VIEWS -->
+
+
+<!-- MEETING VIEW -->
+<div class="container" ng-show="cat['meeting']">
+  <div class="jumbotron">
+
+    <h2 id="meeting">Where would you like to meet Konrad?</h2>
+    <a href="#uber">done</a><br>
+
+    <table><tr><td>
+      <iframe
+        width="640"
+        height="480"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM
+        &q=Space+Needle,Seattle+WA" allowfullscreen>
+      </iframe>
+    </td><td>
+      Filter by:
+      ...
+    </td></tr></table>
+
+    filter by type of food, price, etc.
+
+    <h2 id="uber">It's 30 minute walk to Space Needle, would you like to some lift?</h2>
+
+    <button type="button" class="btn btn-lg btn-success">Yes</button>
+    <button type="button" class="btn btn-lg btn-danger">No</button>
+
+
+  </div>
+</div>
+<!-- END MEETING VIEW -->
 {% endraw %}
 
 </body>

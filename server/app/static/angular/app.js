@@ -1,9 +1,13 @@
 var app = angular.module('unicornX', []);
 
-app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
+app.controller("UnicornCtrl", [
+    '$scope',
+    '$http',
+    function($scope) {
 
     $scope.cat = {
-        'travel': false
+        'travel': false,
+        'meeting': false
     };
 
     $scope.visibility = "";
@@ -41,16 +45,20 @@ app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
     $scope.quornuj = function () {
         console.log('Changed query to ' + $scope.query);
 
-        if ($scope.query.indexOf('travel') > -1) {
-            switchToHotel();
-        }
+        switchToHotel($scope.query.indexOf('travel') > -1);
+        switchToMeeting($scope.query.indexOf('meeting') > -1);
 
         console.log('cat is ', $scope.cat);
     };
 
-    function switchToHotel() {
-        $scope.cat['hotel'] = true;
-        $.toaster({ priority : 'success', title : 'Title', message : 'Your message here'});
+    function switchToHotel(mode) {
+        $scope.cat['hotel'] = mode;
+        if (mode) { $.toaster({ priority : 'success', title : 'Title', message : 'Your message here'}); }
+    }
+
+    function switchToMeeting(mode) {
+        $scope.cat['meeting'] = mode;
+        if (mode) { $.toaster({ priority : 'success', title : 'Title', message : 'Your message here'}); }
     }
 
     console.log('Controller ready');
