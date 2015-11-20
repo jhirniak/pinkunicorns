@@ -8,7 +8,7 @@ class AirBnB:
                                    "Accept": "application/json"
                                })
 
-        print response.body
+        return response.body
 
 
 
