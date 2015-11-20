@@ -88,7 +88,6 @@ class Jarvis(restful.Resource):
             self.cache = {}
 
     def get(self):
-        print self.cache
         parser = reqparse.RequestParser()
         parser.add_argument('text')
         parser.add_argument('access_token')
@@ -127,6 +126,7 @@ class Jarvis(restful.Resource):
             try:
                 rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
             except:
+                print "Error"
                 return {'error': True};
             response['travel']['plan'] = rome2rio[0][0]
             response['travel']['places'] = rome2rio[1]
@@ -154,8 +154,9 @@ class Jarvis(restful.Resource):
         elif data['intent'] == 'restaurant_booking':
             response = {}
             try:
-                response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
+                response['restaurants'] = get_restaurants(data['entities'], None, None, None)
             except:
+                print "Error"
                 return {'error': True};
 
 
