@@ -3,7 +3,7 @@ from flask_restful import reqparse
 from app.nlp.nlp import NLP
 from app.api.social import Facebook
 from app.api.shopping import Amazon
-from app.api.gcal import GCal
+#from app.api.gcal import GCal
 import json
 
 class Analyse(restful.Resource):
@@ -31,8 +31,6 @@ class GoogleCalendar(restful.Resource):
         for q in query:
             response.append({"id": q['id'], "html": "<div>Hello " + q['id'] + "</div>"})
 
-        gcal = GCal()
-        gcal.main()
         return json.dumps(response)
 
 class RunTask(restful.Resource):

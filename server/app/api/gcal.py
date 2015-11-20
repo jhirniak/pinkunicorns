@@ -15,10 +15,11 @@ APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
 try:
     import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+    #flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+    flags = argparse.Namespace(noauth_local_webserver=True)
 except ImportError:
     flags = None
-    
+
 class GCal:
 	def __init__(self):
 		self.credentials = self.get_credentials()
