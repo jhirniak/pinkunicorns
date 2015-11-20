@@ -1,4 +1,4 @@
-<html ng-app="unicornApp">
+<html>
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -9,8 +9,8 @@
   <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
   <title>UnicornX</title>
 </head>
-<body onload="getProfile();">
-<div class="container" ng-controller="MainCtrl as mc">
+<body onload="getProfile();" ng-app="unicornX">
+<div class="container" ng-controller="UnicornCtrl">
   <div>
     <div id="wyjebmnie">
       <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
@@ -21,7 +21,7 @@
       </h1>
     </div>
     <form action="#">
-      <input ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" ng-model="query" autofocus>
+      <input ng-model="query" ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
     </form>
   </div>
 </div>

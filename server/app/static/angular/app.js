@@ -1,11 +1,13 @@
-var app = angular.module("unicornX", []);
+var app = angular.module('unicornX', []);
 
-app.controller("unicornCtrl", function($scope) {
+app.controller("UnicornCtrl", ['$scope', function($scope) {
     $scope.message = "";
     $scope.query = "";
+
     $scope.left  = function() {return 100 - $scope.message.length;};
     $scope.clear = function() {$scope.message = "";};
     $scope.save  = function() {alert("Note Saved");};
+
     $scope.get_query = function() {
     	$.get('/api/v1/jarvis?text=' + $scope.query, function (d) {
 	      $('#herestuff').html(d);
@@ -14,7 +16,8 @@ app.controller("unicornCtrl", function($scope) {
     };
 
     $scope.quornuj = function () {
-        alert('Changed', $scope.query);
+        console.log('Changed query to ' + $scope.query);
     };
 
-});
+    console.log('Controller ready');
+}]);
