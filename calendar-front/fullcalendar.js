@@ -62,6 +62,44 @@ var complexOptions = [ // names of options that are objects whose properties sho
 	'themeButtonIcons'
 ];
 
+function genModal(event,wid) {
+	//;
+	return '';
+/*	return '<div id="modalevent'+wid+'" class="modal fade" role="dialog">'
+  +'<div class="modal-dialog modal-sm"><div class="modal-content">'
+      + '<div class="modal-header">'
+      + '  <button type="button" class="close" data-dismiss="modal">&times;</button>'
+      + '  <h4 class="modal-title">'+event.title+'</h4>'
+      + ' </div>'
+      + '<div class="modal-body">'
+      + '  <p>Some text in the modal.</p>'
+      + '</div>'
+      + '<div class="modal-footer">'
+      + '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'
+      + '</div></div></div></div>' +
+      			'<script>$(\'#modalevent'+wid+'\').appendTo("body")</script>'*/
+}
+
+function konradNow() {
+	return {
+		getHtml: function() {
+			return '<div class="konradNowGen"><input type="text" class="form-control" id="konradNow" placeholder="Start Typing..." autofocus></div>';
+		}
+	}
+}
+
+
+
+function zuMachen() {
+	return {
+		getHtml: function() {
+			//content = 
+			return '<script>$(\'#zuMachen\').appendTo("#corrow");'
+			//+'$(\'#modalevent\').appendTo("body")
+			+'</script>';
+		}
+	}
+}
 
 // Merges an array of option objects into a single object
 function mergeOptions(optionObjs) {
@@ -5319,12 +5357,14 @@ DayGrid.mixin({
 					''
 					) +
 			'>' +
-				'<div class="fc-content">' +
+				'<div class="fc-content" data-toggle="modal" data-target="#modalevent" onclick="angular.element($(\'#modalevent\')).scope().modal.setEvent('+event.id+')">' +
 					(this.isRTL ?
 						titleHtml + ' ' + timeHtml : // put a natural space in between
 						timeHtml + ' ' + titleHtml   //
 						) +
 				'</div>' +
+				//genModal(event,event.id);
+				//+
 				(isResizableFromStart ?
 					'<div class="fc-resizer fc-start-resizer" />' :
 					''
@@ -6594,6 +6634,7 @@ TimeGrid.mixin({
 		var timeText;
 		var fullTimeText; // more verbose time text. for the print stylesheet
 		var startTimeText; // just the start time text
+		var wid = genWid();
 
 		classes.unshift('fc-time-grid-event', 'fc-v-event');
 
@@ -6613,7 +6654,8 @@ TimeGrid.mixin({
 			startTimeText = this.getEventTimeText(event, null, false); // displayEnd=false
 		}
 
-		return '<a class="' + classes.join(' ') + '"' +
+		return '<a class="' + classes.join(' ') + '"' + 
+
 			(event.url ?
 				' href="' + htmlEscape(event.url) + '"' :
 				''
@@ -6640,6 +6682,8 @@ TimeGrid.mixin({
 						''
 						) +
 				'</div>' +
+				genModal(event,wid);
+				+
 				'<div class="fc-bg"/>' +
 				/* TODO: write CSS for this
 				(isResizableFromStart ?
@@ -6842,6 +6886,7 @@ var View = fc.View = Class.extend({
 	type: null, // subclass' view name (string)
 	name: null, // deprecated. use `type` instead
 	title: null, // the text that will be displayed in the header's title
+	eventType: null, // type of the event
 
 	calendar: null, // owner Calendar object
 	options: null, // hash containing all options. already merged with view-specific-options
@@ -8291,13 +8336,25 @@ function Calendar_constructor(element, overrides) {
 			element.addClass('fc-unthemed');
 		}
 
-		content = $("<div class='fc-view-container'/>").prependTo(element);
+		ct = $("<div class='container-fluid'/>").prependTo(element);
+		xt = $("<div class='row' id='corrow'>").prependTo(ct);
+
+		content = $("<div class='col-xs-12 col-md-8 fc-view-container'/>").prependTo(element);
+
 
 		header = t.header = new Header(t, options);
 		headerElement = header.render();
 		if (headerElement) {
 			element.prepend(headerElement);
 		}
+
+		zumachen = zuMachen();
+		zumachenElement = zumachen.getHtml();
+		$(zumachenElement).prependTo(ct)
+
+		konradnow = konradNow();
+		konradElement = konradnow.getHtml();
+		element.prepend(konradElement);
 
 		renderView(options.defaultView);
 

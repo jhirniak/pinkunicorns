@@ -32,6 +32,19 @@ body .fc { /* extra precedence to overcome jqui */
 	border-color: #ddd;
 }
 
+.konradNowGen {
+	margin: 30px;
+}
+
+.zuMachen {
+	float: right;
+	width: 100%;
+}
+
+#corrow {
+	width: 140%;
+}
+
 .fc-unthemed .fc-popover {
 	background-color: #fff;
 }
