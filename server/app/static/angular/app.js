@@ -36,6 +36,11 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
             }
 
 	      	$scope.accomodation = d["accomodation"];
+            $scope.accomodation.result = _.map($scope.accomodation.result, function (item) {
+                item.rating = _.range(Math.floor((Math.random() * 5) + 1));
+                return item;
+            });
+
 	      	$scope.travel = d["travel"];
 	      	$scope.visibility = "travel";
 	      	$scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=3');
