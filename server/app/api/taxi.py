@@ -54,7 +54,25 @@ class Uber:
 
         return response
 
+    def get_estimate(self, lat, lng, end_lat, end_lng):
+        url = 'https://api.uber.com/v1/estimates/price'
+
+        parameters = {
+            'start_latitude': lat,
+            'start_longitude': lng,
+            'end_latitude': end_lat,
+            'end_longitude': end_lng,
+        }
+
+        response = requests.get(url, headers={
+            'Authorization': 'Bearer %s' % self.access_token,
+        }, data=parameters)
+
+        data = response.json()
+
+        return data
+
 
 if __name__ == '__main__':
     u = Uber()
-    print u.update_booking('d88a4e06-5aab-4b02-ac69-c780437177a8')
+    print u.get_estimate()

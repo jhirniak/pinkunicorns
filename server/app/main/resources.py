@@ -5,6 +5,7 @@ from app.api.social import Facebook
 from app.api.shopping import Amazon
 #from app.api.gcal import GCal
 import json
+from app.api.jarvis import *
 
 class Analyse(restful.Resource):
     def get(self):
@@ -55,3 +56,14 @@ class RunTask(restful.Resource):
                     products[like] = items[1]
 
             return products
+
+
+class Jarvis(restful.Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('text')
+        args = parser.parse_args()
+
+        data = parse(args['text'])
+
+        return data
