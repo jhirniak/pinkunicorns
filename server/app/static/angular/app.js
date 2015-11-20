@@ -14,6 +14,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 
     $scope.message = "";
     $scope.query = "";
+    $scope.errvis = false;
 
     $scope.left = function () {
         return 100 - $scope.message.length;
@@ -26,14 +27,18 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
     };
 
     $scope.showError = function() {
-    	$('#error').fadeIn();
+    	$('#errorunicorn').fadeIn();
+    	$scope.errvis = true;
     };
 
     $scope.hideError = function() {
-    	$('#error').fadeIn();
+    	if($scope.errvis) {
+    		$('#errorunicorn').fadeOut();
+    	}
     };
 
     $scope.get_query = function (event) {
+    	$scope.hideError();
         event.preventDefault();
         $scope.loading = true;
         $scope.visibility = '';
@@ -50,9 +55,8 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 	      if(d["error"]) {
 	      	$scope.showError();
 	      	$sope.visibility = "";
-	      } else {
-	      	$scope.hideError();
-	      }
+	      	console.log("Error!");
+	      } 
 	      if(d["type"] == "travel") {
             $scope.visibility = "travel";
             $scope.travel = d["travel"];
