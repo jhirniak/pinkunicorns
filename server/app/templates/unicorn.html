@@ -15,6 +15,16 @@
     window.authtoken = authtoken;
   </script>
   <style>
+      .amazon-img {
+         background-clip: content-box;
+          border: 1px solid black;
+      }
+
+      .like {
+        width: 40px;
+        margin-bottom: 10px;
+        margin-left: 5px;
+      }
     .uber-text {
       margin-top: 5px;
     }
@@ -28,6 +38,12 @@
       margin-left: 10px;
       height: 40px;
       display: inline-block;
+  }
+
+  .amazon-btn {
+    right: 25px;
+    position: absolute;
+    margin-top: 5px;
   }
 
   .center {
@@ -117,71 +133,43 @@
 <div ng-show="loading" class="center">
     <img src="{{url_for('static', filename='spinner.gif')}}">
 </div>
-{% raw %}
 <!--what can i get michael for his birthday-->
 <div>
     <div ng-show="isVisible('birthdays')">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {{name}} likes</h2>
+                <h3>We found that your friend <strong>{{name}}</strong> likes <img class="like" src="{{url_for('static', filename='like-icon.png')}}"></h3>
+
+{% raw %}
+
 
                 <h3>
                     <div class="row">
                         <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
                         <div ng-repeat="like in likes" class="lol-co">
                <span class="label label-primary">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                          style="font-size:.8em; ">
+                    <span class="glyphicon glyphicon-remove" style="" aria-hidden="true"
+                          style="font-size:.9em; ">
                        {{like}}
                     </span></span></div>
                     </div>
                 </h3>
 
-                <h2>... so we thought that these are good present ideas:</h2>
+                <h3>... so we thought that these are good present ideas:</h3>
             <div class="row">
                         <div class="col-sm-6 col-md-4" ng-repeat="product in products" >
     <div class="thumbnail" style="height: 350px;">
         <div style="height: 150px;">
-      <img src="{{product.image}}" alt="Image" class="center-block"></div>
-      <div class="caption">
-        <h5 style="height: 60px;">{{product.name}}</h5>
+          <img src="{{product.image}}" style="margin-top: 10px;" alt="Image" class="center-block amazon-img">
+          <img src="/static/prime.png" alt="Image" style="width: 100px; margin-top: -35px;" class="center-block">
+        </div>
+      <div class="caption" style="margin-top: 7px">
+        <h4 style="height: 50px; text-align: center">{{product.name}}</h4>
         <p>Price £{{product.price}}</p>
-        <p><a href="{{product.offer_url}}" class="btn btn-primary" target="_blank" role="button">Get it now!</a></p>
+        <p><a href="{{product.offer_url}}" class="btn btn-primary amazon-btn" target="_blank" role="button">Get it now!</a></p>
       </div>
     </div>
   </div>
-                   <!-- <div 
-                        style="padding: 10px;">
-                        <div class="col-md-2" style="height: 100px;">
-                            <a href="{{ product.offer_url }}" target="_blank">
-                                <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
-                            </a>
-                        </div>
-                        <div class="col-md-4" style="height: 100px;">
-                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
-                                    <b>
-                                        {{product.name}}
-                                    </b>
-                                </a>                      
-                                    <span>£{{product.price}}</span>
-                        </div>
-                    </div>
-                    <!-- <div
-                         style="padding: 10px;">
-                         <div class="col-md-2" style="height: 100px;">
-                             <a href="{{ product.offer_url }}" target="_blank">
-                                 <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
-                             </a>
-                         </div>
-                         <div class="col-md-4" style="height: 100px;">
-                                 <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
-                                     <b>
-                                         {{product.name}}
-                                     </b>
-                                 </a>
-                                     <span>£{{product.price}}</span>
-                         </div>
-                     </div>-->
                 </div>
             </div>
         </div>
@@ -207,43 +195,83 @@
 
             <div class="flight_info">
                 <div class="row">
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-1">
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <h3 class="uber-text">{{ travel.plan.name }}</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">£</span>
                             <input type="text" class="form-control"
                                    placeholder="{{ travel.plan.indicativePrice.price }}"
-                                   aria-describedby="sizing-addon1" disabled>
+                                   aria-describedby="sizing-addon1" >
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon2"><span
                                     class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
                             <input type="text" class="form-control" placeholder="{{ travel.plan.duration }}"
-                                   aria-describedby="sizing-addon1" disabled>
+                                   aria-describedby="sizing-addon1" >
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon3">@</span>
-                            <input type="text" class="form-control" placeholder="{{ travel.plan.name }}"
-                                   aria-describedby="sizing-addon1" disabled>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
                                                                                      aria-hidden="true"></span></span>
                             <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m"
-                                   aria-describedby="sizing-addon1" disabled>
+                                   aria-describedby="sizing-addon1" >
                         </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
+                    </div>
+                </div>
+
+                <hr style="border-color: #B5B5B5;">
+
+                <div class="row uber">
+                    <div class="col-sm-6 col-md-1">
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <h3 class="uber-text">Rental Car</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">£</span>
+                            <input type="text" class="form-control"
+                                   placeholder="{{ rental.results[0].cars[0].estimated_total.amount }}"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon2"><span
+                                    class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="46h 23m"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
+                                                                                     aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
                     </div>
                 </div>
             </div>
             <hr/>
 <div class="row">
             <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'" >
-                <div class="thumbnail" style="height: 400px;">
+                <div class="thumbnail" style="height: 415px;">
                     <div style="height: 180px;">
                         <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black; margin-top: 15px;" class="center-block"></div>
                     <div class="caption">
@@ -256,6 +284,15 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="button" ng-click="foodClick()" class="btn btn-warning" >
+                    <img src="/static/food.png" style="width: 45px" />
+                    <p style="font-size: 2em;">Hungry?</p>
+                </button>
+            </div>
         </div>
 
     </div>
@@ -284,7 +321,7 @@
                     <div class="col-sm-6 col-md-1">
                     </div>
                     <div class="col-sm-6 col-md-2">
-                        <h3 class="uber-text">Taxi</h3>
+                        <h3 class="uber-text">{{ travel.plan.name }}</h3>
                     </div>
                     <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
@@ -357,6 +394,16 @@
             <hr/>
         </div>
 
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="button" ng-click="foodClick()" class="btn btn-warning" >
+                    <img src="/static/food.png" style="width: 45px" />
+                    <p style="font-size: 2em;">Hungry?</p>
+                </button>
+            </div>
+        </div>
+
     </div>
     <div id="cleared"></div>
 </div>
@@ -396,6 +443,7 @@
 
 
 <div class="text-center" style="display: none" id="error">
+<div class="text-center" style="display: none" id="errorunicorn">
     <h1>I am a Unicorn. I can't help you :(</h1>
 </div>
 {% endraw %}

@@ -165,6 +165,7 @@ class Jarvis(restful.Resource):
 
                 cars = CarRental()
                 response['rental'] = cars.get_cars(start[0], start[1])
+
             else:
                 uber = Uber()
 
