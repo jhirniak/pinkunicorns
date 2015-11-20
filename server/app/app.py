@@ -14,6 +14,9 @@ def create_app(config_name):
 
     api_url = '/api/v1'
 
+    from main import main as main_blueprint
+    app.register_blueprint(main_blueprint, url_prefix='/')
+
     api = Api(app)
     api.add_resource(resources.Analyse, api_url + '/analyse')
 
