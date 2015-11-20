@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+  <style>
+
+    .jumbotron > .map {
+      float: left;
+      width: 400px;
+      height: 100%;
+    }
+
+    .jumbotron > .info {
+      float: right;
+    }
+
+    #cleared {
+      clear: both;
+    }
+  </style>
+
+</head>
+<body>
+<div class="container">
+<div class="jumbotron">
+  <div class="map">
+    <iframe
+      width="400"
+      height="600"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM
+        &q=Space+Needle,Seattle+WA" allowfullscreen>
+    </iframe>
+  </div>
+  <div class="info">
+
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+      <span class="input-group-addon">.00</span>
+    </div>
+
+    <hr>
+    <h2>Your reservation in Aloft Silicon Valley</h2>
+
+  </div>
+  <div id="cleared"></div>
+</div>
+</div>
+</body>
+</html>

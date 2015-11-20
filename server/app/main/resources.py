@@ -55,3 +55,12 @@ class RunTask(restful.Resource):
                     products[like] = items[1]
 
             return products
+
+        elif args['category'] == 'travel':
+            pass
+
+        elif args['category'] == 'meeting':
+            pass
+
+        else:
+            pass
