@@ -124,7 +124,10 @@ class Jarvis(restful.Resource):
         elif data['intent'] == 'travel':
             response = {'travel': {}}
 
-            rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
+            try:
+                rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
+            except:
+                return "<h3>Sorry, I can't help you. I am a Unicorn</h3>";
             response['travel']['plan'] = rome2rio[0][0]
             response['travel']['places'] = rome2rio[1]
 
