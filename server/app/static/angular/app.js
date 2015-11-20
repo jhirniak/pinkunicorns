@@ -11,13 +11,12 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 
     //$sce.trustAsResourceUrl("https://maps.googleapis.com/maps/api/directions/json");
 
-    
     $scope.message = "";
     $scope.query = "";
 
-    $scope.left  = function() {return 100 - $scope.message.length;};
-    $scope.clear = function() {$scope.message = "";};
-    $scope.save  = function() {alert("Note Saved");};
+    $scope.left  = function() { return 100 - $scope.message.length; };
+    $scope.clear = function() { $scope.message = ""; };
+    $scope.save  = function() { alert("Note Saved"); };
 
     $scope.get_query = function(event) {
         event.preventDefault();
@@ -29,10 +28,16 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 	      console.log(d);
 	      alert(d["type"]);
 	      if(d["type"] == "travel") {
+            if(_.has(d, 'accomodation')) {
+              console.log('Long');
+            } else {
+              console.log('short');
+            }
+
 	      	$scope.accomodation = d["accomodation"];
 	      	$scope.travel = d["travel"];
 	      	$scope.visibility = "travel";
-	      	$scope.getRU = $sce.trustAsResourceUrl('https://maps.googleapis.com/maps/api/directions/json?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM');
+	      	$scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=3');
 	      } else if(d["type"] == "birthdays") {
 	      	$scope.likes = Object.keys(d.products);
             $scope.name = d.name;
