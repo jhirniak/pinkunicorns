@@ -42,7 +42,13 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 	      } else if(d["type"] == "birthdays") {
 	      	$scope.likes = Object.keys(d.products);
             $scope.name = d.name;
-            $scope.products = _.flatten(_.values(d.products));
+            products = _.flatten(_.values(d.products));
+            $scope.products = [];
+            for (var i = 0; i < products.length; i++) {
+            	if(products[i]["price"] != "" && products[i]["price"] > 0) {
+            		$scope.products.push(products[i]);
+            	}
+            }
             $scope.visibility = "birthdays";
 	      } else if(d["type"] == "") {
 	      	
