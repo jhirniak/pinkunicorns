@@ -4,9 +4,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
   <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
+
+  <script>
+    var authtoken = $.cookie("token");
+    window.authtoken = authtoken;
+  </script>
+
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
 
-  <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
   <title>UnicornX</title>
 </head>
 <body onload="getProfile();" ng-controller="UnicornCtrl">
@@ -28,7 +34,6 @@
 <div id="herestuff"></div>
 <script>
   var events = [];
-  var authtoken = $.cookie("token");
   function perm() {
     $.getJSON("https://graph.facebook.com/me/permissions?access_token=" + authtoken, function (info) {
       console.log(info);
@@ -72,7 +77,7 @@
                             <div id="DIV_2">
                                 <div id="DIV_3">
                                     <a href="{{ product.offer_url }}" target="_blank" id="A_4">
-                                        <img alt="Product Details" src="{{ product.image }}" id="IMG_5"/>
+                                        <img alt="Product Details" ng-src="{{ product.image }}" id="IMG_5"/>
                                     </a>
 
                                     <div id="DIV_6">

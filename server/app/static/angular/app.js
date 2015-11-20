@@ -12,7 +12,7 @@ app.controller("UnicornCtrl", ['$scope', function($scope) {
     $scope.save  = function() {alert("Note Saved");};
 
     $scope.get_query = function() {
-    	$.get('/api/v1/jarvis?text=' + $scope.query, function (d) {
+    	$.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken, function (d) {
 	      $('#herestuff').html(d);
 	      console.log(d);
 	    });
