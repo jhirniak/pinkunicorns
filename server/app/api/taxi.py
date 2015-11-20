@@ -70,9 +70,14 @@ class Uber:
 
         data = response.json()
 
+        for i in range(0, len(data['prices'])):
+            data['prices'][i]['duration'] /= 60
+            data['prices'][i]['duration'] = str(data['prices'][i]['duration']) + 'min'
+            data['prices'][i]['low_estimate'] = str(data['prices'][i]['low_estimate'])
+
         return data
 
 
 if __name__ == '__main__':
     u = Uber()
-    print u.get_estimate()
+    print u.get_estimate(37.7833, -122.4167, 37.8833,-122.5167)
