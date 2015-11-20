@@ -20,6 +20,8 @@
 
   .lol-co {
       margin-left: 10px;
+      height: 40px;
+      display: inline-block;
   }
 
   </style>
@@ -78,57 +80,43 @@
 
 
 {% raw %}
+<!--what can i get michael for his birthday-->
 <div>
     <div ng-show="isVisible('birthdays')">
         <div class="container">
             <div class="jumbotron present">
                 <h2>We found that your friend {{name}} likes</h2>
 
-                <h3>
-                <span ng-repeat="like in likes" class="label label-primary lol-co">
+                <h3><div class="row">
+                    <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
+               <div ng-repeat="like in likes" class="lol-co">
+               <span class="label label-primary">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                        style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;">
+                        style="font-size:.8em; ">
                        {{like}}
-                    </span></span>
+                    </span></span></div></div>
                 </h3>
 
                 <h2>... so we thought that these are good present ideas:</h2>
-
-                <h3>
-                    <div ng-repeat="product in products">
-                        <div id="DIV_1">
-                            <div id="DIV_2">
-                                <div id="DIV_3">
-
-                                    <a href="{{ product.offer_url }}" target="_blank" id="A_4">
-                                        <img class="cipa" alt="Product Details" ng-src="{{ product.image }}" id="IMG_5"/>
-
-                                    </a>
-
-                                    <div id="DIV_6">
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row">
+                    <div ng-repeat="product in products" 
+                        style="padding: 10px;">
+                        <div class="col-md-2" style="height: 100px;">
+                            <a href="{{ product.offer_url }}" target="_blank">
+                                <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
+                            </a>
                         </div>
-                        <div id="DIV_7">
-                            <div id="DIV_8">
-                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank" id="A_9">
-
-                                    <h2 id="H2_10">
+                        <div class="col-md-4" style="height: 100px;">
+                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
+                                    <b>
                                         {{product.name}}
-                                    </h2>
-                                </a>
-                            </div>
-                            <div id="DIV_11">
-                                <a href="{{product.offer_url}}" target="_blank" id="A_12">
-                                    <span id="SPAN_13">£{{product.price}}</span>
-                                </a>
-                                <i id="I_15"></i>
-                            </div>
+                                    </b>
+                                </a>                      
+                                    <span>£{{product.price}}</span>
                         </div>
                     </div>
-                </h3>
             </div>
+        </div>
         </div>
     </div>
 </div>
