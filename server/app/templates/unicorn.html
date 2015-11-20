@@ -22,6 +22,14 @@
       margin-left: 10px;
   }
 
+  .center {
+    width: 64px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
   </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
@@ -75,8 +83,9 @@
   }
 </script>
 
-
-
+<div ng-show="loading" class="center">
+    <img src="{{url_for('static', filename='spinner.gif')}}">
+</div>
 {% raw %}
 <div>
     <div ng-show="isVisible('birthdays')">
@@ -146,8 +155,6 @@
       </iframe>
     </div>
     <div class="info">
-
-
 
       <hr>
       <h2>Your reservation in Aloft Silicon Valley</h2>
