@@ -55,8 +55,8 @@
   <script src="{{url_for('static', filename='jquery.toaster.js')}}"></script>
   <!-- TOSTY SIE SKONCZYLY -->
 </head>
-<body onload="getProfile();" ng-controller="UnicornCtrl">
-<div class="container" >
+<body onload="getProfile();" ng-controller="UnicornCtrl" style="margin-top: 50px;">
+<div class="container">
   <div>
     <div id="wyjebmnie">
       <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
@@ -115,7 +115,18 @@
 
                 <h2>... so we thought that these are good present ideas:</h2>
                     <div class="row">
-                    <div ng-repeat="product in products" 
+                        <div class="col-sm-6 col-md-4" ng-repeat="product in products" >
+    <div class="thumbnail" style="height: 350px;">
+        <div style="height: 150px;">
+      <img src="{{product.image}}" alt="Image" class="center-block"></div>
+      <div class="caption">
+        <h4 style="height: 80px;">{{product.name}}</h4>
+        <p>£{{product.price}}</p>
+        <p><a href="{{product.offer_url}}" class="btn btn-primary" role="button">Get it now!</a></p>
+      </div>
+    </div>
+  </div>
+                   <!-- <div 
                         style="padding: 10px;">
                         <div class="col-md-2" style="height: 100px;">
                             <a href="{{ product.offer_url }}" target="_blank">
@@ -130,7 +141,7 @@
                                 </a>                      
                                     <span>£{{product.price}}</span>
                         </div>
-                    </div>
+                    </div>-->
             </div>
         </div>
         </div>

@@ -26,7 +26,6 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
                 $scope.loading = false;
           var d = resp.data;
 	      console.log(d);
-	      alert(d["type"]);
 	      if(d["type"] == "travel") {
             if(_.has(d, 'accomodation')) {
               console.log('Long');
