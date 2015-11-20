@@ -207,36 +207,76 @@
 
             <div class="flight_info">
                 <div class="row">
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-1">
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <h3 class="uber-text">{{ travel.plan.name }}</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon1">£</span>
                             <input type="text" class="form-control"
                                    placeholder="{{ travel.plan.indicativePrice.price }}"
-                                   aria-describedby="sizing-addon1" disabled>
+                                   aria-describedby="sizing-addon1" >
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon2"><span
                                     class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
                             <input type="text" class="form-control" placeholder="{{ travel.plan.duration }}"
-                                   aria-describedby="sizing-addon1" disabled>
+                                   aria-describedby="sizing-addon1" >
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon3">@</span>
-                            <input type="text" class="form-control" placeholder="{{ travel.plan.name }}"
-                                   aria-describedby="sizing-addon1" disabled>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
                                                                                      aria-hidden="true"></span></span>
                             <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m"
-                                   aria-describedby="sizing-addon1" disabled>
+                                   aria-describedby="sizing-addon1" >
                         </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
+                    </div>
+                </div>
+
+                <hr style="border-color: #B5B5B5;">
+
+                <div class="row uber">
+                    <div class="col-sm-6 col-md-1">
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <h3 class="uber-text">Rental Car</h3>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">£</span>
+                            <input type="text" class="form-control"
+                                   placeholder="{{ rental.results[0].cars[0].estimated_total.amount }}"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon2"><span
+                                    class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="46h 23m"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon4"><span class="glyphicon glyphicon-globe"
+                                                                                     aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" placeholder="{{ travel.plan.distance }}m"
+                                   aria-describedby="sizing-addon1" >
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <button type="submit" class="btn btn-primary uber-btn">Book Now!</button>
                     </div>
                 </div>
             </div>
@@ -284,7 +324,7 @@
                     <div class="col-sm-6 col-md-1">
                     </div>
                     <div class="col-sm-6 col-md-2">
-                        <h3 class="uber-text">Taxi</h3>
+                        <h3 class="uber-text">{{ travel.plan.name }}</h3>
                     </div>
                     <div class="col-sm-6 col-md-2">
                         <div class="input-group input-group-lg">

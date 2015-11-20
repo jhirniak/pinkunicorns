@@ -59,6 +59,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 
             if(_.has(d, 'accomodation')) {
               $scope.longTravel = true;
+                $scope.rental = d['rental'];
                 $scope.accomodation = d["accomodation"];
                 $scope.accomodation.result = _.map($scope.accomodation.result, function (item) {
                     item.rating = _.range(Math.floor((Math.random() * 5) + 1));
