@@ -10,6 +10,7 @@ from app.api.rome_to_rio import *
 from app.api.accomodation import AirBnB
 from app.api.taxi import Uber
 
+
 class Analyse(restful.Resource):
     def get(self):
         parser = reqparse.RequestParser()
@@ -90,17 +91,18 @@ class Jarvis(restful.Resource):
                 'name': data['entities']['contact'][0]['value'],
             }
 
+            response['type'] = data['intent']
+
             return response
 
         elif data['intent'] == 'travel':
-            response = {'travel':{}}
+            response = {'travel': {}}
 
             rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
             response['travel']['plan'] = rome2rio[0][0]
             response['travel']['places'] = rome2rio[1]
 
             pos = rome2rio[1][1]['pos'].split(',')
-
 
             if response['travel']['plan']['distance'] > 200:
                 airbnb = AirBnB()
@@ -112,6 +114,6 @@ class Jarvis(restful.Resource):
 
                 response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
 
-
+            response['type'] = data['intent']
 
             return response
