@@ -9,7 +9,9 @@ def parse(text):
     if 'contact' in response['outcomes'][0]['entities']:
         for i in range(0, len(response['outcomes'][0]['entities']['contact'])):
             if str(response['outcomes'][0]['entities']['contact'][i]['value']).lower() == 'i':
-                del response['outcomes'][0]['entities']['contact'][i]['value']
+                del response['outcomes'][0]['entities']['contact'][i]
+                break
 
+    print response['outcomes'][0]
     return response['outcomes'][0]
 

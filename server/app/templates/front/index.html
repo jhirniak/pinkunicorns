@@ -1,0 +1,91 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="{{ url_for('static', filename='front/birthday.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+          integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+            integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+            crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
+    <style>
+        span.label {
+            margin: .7em;
+        }
+
+        .cipka {
+            height: 80px;
+            width: 80px;
+            margin-bottom: 25px;
+        }
+
+        .products {
+            list-style-type: none;
+        }
+
+    </style>
+</head>
+<body>
+{% raw %}
+
+<div ng-controller="BirthdayCtrl as bc">
+    <button ng-click="bc.stuff()"></button>
+    <div ng-show="bc.isLoaded">
+        <div class="container">
+            <div class="jumbotron present">
+                <h2>We found that your friend {{ bc.name }} likes</h2>
+
+                <h3>
+                <span ng-repeat="like in bc.likes" class="label label-primary">{{ like }}<span
+                        class="glyphicon glyphicon-remove" aria-hidden="true"
+                        style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;"></span></span>
+                </h3>
+
+                <h2>... so we thought that these are good present ideas:</h2>
+
+                <h3>
+                    <div ng-repeat="product in bc.products">
+                        <div id="DIV_1">
+                            <div id="DIV_2">
+                                <div id="DIV_3">
+                                    <a href="{{ product.offer_url }}" target="_blank" id="A_4">
+                                        <img alt="Product Details" src="{{ product.image }}" id="IMG_5"/>
+                                    </a>
+
+                                    <div id="DIV_6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="DIV_7">
+                            <div id="DIV_8">
+                                <a title="{{ product.name }}" href="{{ product.offer_url }}" target="_blank" id="A_9">
+
+                                    <h2 id="H2_10">
+                                        {{ product.name }}
+                                    </h2>
+                                </a>
+                            </div>
+                            <div id="DIV_11">
+                                <a href="{{ product.offer_url }}" target="_blank" id="A_12">
+                                    <span id="SPAN_13">£{{ product.price }}</span>
+                                </a>
+                                <i id="I_15"></i>
+                            </div>
+                        </div>
+                    </div>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endraw %}
+</body>
+</html>
