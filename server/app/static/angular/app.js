@@ -34,7 +34,9 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
     };
 
     $scope.get_query = function (event) {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         $scope.loading = true;
         $scope.visibility = '';
         $scope.longTravel = false;
@@ -139,6 +141,13 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
                     });
 
                 } else if (d["type"] == "flights") {
+
+              $scope.chujeMuje = function() {
+                  $scope.clear();
+                  $scope.query = 'take me to los angeles';
+                  $scope.get_query();
+              };
+
               $scope.ppFlights = [];
                     $scope.visibility = "flights";
                     console.log('DATAA', d);

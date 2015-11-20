@@ -384,7 +384,7 @@
     <div style="width: 260px; max-height: 740px; word-wrap: break-word; display: inline-block; overflow-y:scroll; "  >
       <ul class="list-group">
         <li ng-repeat="flight in ppFlights" class="list-group-item">
-          <a href="{{ }}">
+          <a href="{{ }}" ng-click="chujeMuje()">
             <span class="badge list-group-item-success pull-right">{{ flight['price'] }}</span>
             {{ flight['airport'] }} -> {{ flight['destination'] }}
           </a>
