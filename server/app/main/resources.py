@@ -9,6 +9,9 @@ from app.api.jarvis import *
 from app.api.rome_to_rio import *
 from app.api.accomodation import AirBnB
 from app.api.taxi import Uber
+from app.api.opentable import *
+from app.api.flights import InspiredFlights
+import os.path
 
 
 class Analyse(restful.Resource):
@@ -65,13 +68,37 @@ class RunTask(restful.Resource):
 
 
 class Jarvis(restful.Resource):
+    def __init__(self):
+        self.cache = {}
+
+        self.load_cache()
+
+    def save_cache(self):
+        f = open('cache.json', 'w+')
+        f.write(json.dumps(self.cache))
+        f.close()
+
+    def load_cache(self):
+        if os.path.exists('cache.json'):
+            f = open('cache.json')
+            self.cache = json.loads(f.read())
+            f.close()
+        else:
+            self.cache = {}
+
     def get(self):
+        print self.cache
         parser = reqparse.RequestParser()
         parser.add_argument('text')
         parser.add_argument('access_token')
         args = parser.parse_args()
 
+        if args['text'].lower() in self.cache:
+            return self.cache[args['text'].lower()]
+
         data = parse(args['text'])
+
+        response = {}
 
         if data['intent'] == 'birthdays':
             facebook = Facebook(args['access_token'])
@@ -91,9 +118,7 @@ class Jarvis(restful.Resource):
                 'name': data['entities']['contact'][0]['value'],
             }
 
-            response['type'] = data['intent']
 
-            return response
 
         elif data['intent'] == 'travel':
             response = {'travel': {}}
@@ -114,6 +139,24 @@ class Jarvis(restful.Resource):
 
                 response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
 
-            response['type'] = data['intent']
 
-            return response
+
+        elif data['intent'] == 'restaurant_booking':
+            response = {}
+            response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
+
+
+
+        elif data['intent'] == 'flights':
+            response = {}
+            flights = InspiredFlights()
+
+            response['flights'] = flights.where_can_i_fly(data['entities']['location'][0]['value'],
+                                                          data['entities']['amount_of_money'][0]['value'])
+
+
+        response['type'] = data['intent']
+
+        self.cache[args['text'].lower()] = response
+        self.save_cache()
+        return response
