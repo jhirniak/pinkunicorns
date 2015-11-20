@@ -141,7 +141,7 @@ img.amazon {
     overflow-wrap: break-word;
     text-align: center;
     vertical-align: top;
-    width: 200px;
+    /*width: 200px;*/
     word-wrap: break-word;
     perspective-origin: 100px 100px;
     transform-origin: 100px 100px;

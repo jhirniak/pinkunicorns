@@ -17,6 +17,11 @@
       width: 80px;
       margin-bottom: 25px;
     }
+
+  .lol-co {
+      margin-left: 10px;
+  }
+
   </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
@@ -78,7 +83,7 @@
                 <h2>We found that your friend {{name}} likes</h2>
 
                 <h3>
-                <span ng-repeat="like in likes" class="label label-primary">
+                <span ng-repeat="like in likes" class="label label-primary lol-co">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
                         style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;">
                        {{like}}
