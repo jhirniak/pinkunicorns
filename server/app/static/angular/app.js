@@ -1,11 +1,11 @@
 var app = angular.module('unicornX', []);
 
-app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
+app.controller("UnicornCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.visibility = "";
 
     $scope.isVisible = function(x) {
     	return $scope.visibility == x;
-    }
+    };
 
     $scope.message = "";
     $scope.query = "";
@@ -16,7 +16,9 @@ app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
 
     $scope.get_query = function(event) {
         event.preventDefault();
-    	$.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken, function (d) {
+    	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
+            .then(function (resp) {
+          var d = resp.data;
 	      console.log(d);
 	      if(d["type"] == "travel") {
 	      	$scope.accomodation = d["accomodation"];

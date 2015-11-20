@@ -3,13 +3,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
   <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
   <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
-
+  <script src="{{ url_for('static', filename='bower_components/lodash/lodash.min.js') }}"></script>
   <script>
     var authtoken = $.cookie("token");
     window.authtoken = authtoken;
   </script>
+  <style>
+    .cipa {
+      height: 80px;
+      width: 80px;
+      margin-bottom: 25px;
+    }
+  </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
 
@@ -67,12 +75,14 @@
     <div ng-show="isVisible('birthdays')">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {name} likes</h2>
+                <h2>We found that your friend {{name}} likes</h2>
 
                 <h3>
-                <span ng-repeat="like in uc.likes" class="label label-primary">{like}<span
-                        class="glyphicon glyphicon-remove" aria-hidden="true"
-                        style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;"></span></span>
+                <span ng-repeat="like in likes" class="label label-primary">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"
+                        style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;">
+                       {{like}}
+                    </span></span>
                 </h3>
 
                 <h2>... so we thought that these are good present ideas:</h2>
@@ -84,7 +94,7 @@
                                 <div id="DIV_3">
 
                                     <a href="{{ product.offer_url }}" target="_blank" id="A_4">
-                                        <img alt="Product Details" ng-src="{{ product.image }}" id="IMG_5"/>
+                                        <img class="cipa" alt="Product Details" ng-src="{{ product.image }}" id="IMG_5"/>
 
                                     </a>
 
