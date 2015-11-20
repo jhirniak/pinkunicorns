@@ -9,6 +9,8 @@ from app.api.jarvis import *
 from app.api.rome_to_rio import *
 from app.api.accomodation import AirBnB
 from app.api.taxi import Uber
+from app.api.opentable import *
+from app.api.flights import InspiredFlights
 
 
 class Analyse(restful.Resource):
@@ -113,6 +115,24 @@ class Jarvis(restful.Resource):
                 start = rome2rio[1][0]['pos'].split(',')
 
                 response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
+
+            response['type'] = data['intent']
+
+            return response
+
+        elif data['intent'] == 'restaurant_booking':
+            response = {}
+            response['restaurants'] = get_restaurants(data['entities']['location'][0]['value'], None, None, None)
+
+            response['type'] = data['intent']
+
+            return response
+
+        elif data['intent'] == 'flights':
+            response = {}
+            flights = InspiredFlights()
+
+            response['flights'] = flights.where_can_i_fly(data['entities']['location'][0]['value'], data['entities']['amount_of_money'][0]['value'])
 
             response['type'] = data['intent']
 
