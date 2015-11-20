@@ -9,7 +9,7 @@ class CarRental:
     def get_cars(self, lat, lng):
         resp = self.cars.search_circle(
         pick_up='2015-11-25',
-        drop_off='2015-11-30',
+        drop_off='2015-11-26',
         latitude=lat,
         longitude=lng,
         radius=70,
