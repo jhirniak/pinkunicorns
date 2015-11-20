@@ -1,8 +1,14 @@
+
 from flask import Flask
+
 from flask.ext.cors import CORS
 from settings.config import config
 from .extensions import db, bootstrap
+
 from flask.ext.restful import Api
+
+from extensions import bootstrap, db
+from settings.config import config
 
 def create_app(config_name):
     """Create a flask app from a config"""

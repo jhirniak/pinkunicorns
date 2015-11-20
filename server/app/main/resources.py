@@ -67,3 +67,4 @@ class Jarvis(restful.Resource):
         data = parse(args['text'])
 
         return data
+
