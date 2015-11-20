@@ -63,14 +63,14 @@
 
 
 {% raw %}
-<div ng-controller="BirthdayCtrl as bc">
-    <div ng-show="bc.isLoaded">
+<div>
+    <div ng-show="uc.isLoaded">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {{bc.name}} likes</h2>
+                <h2>We found that your friend {uc.name} likes</h2>
 
                 <h3>
-                <span ng-repeat="like in bc.likes" class="label label-primary">{like}<span
+                <span ng-repeat="like in uc.likes" class="label label-primary">{like}<span
                         class="glyphicon glyphicon-remove" aria-hidden="true"
                         style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;"></span></span>
                 </h3>
@@ -78,7 +78,7 @@
                 <h2>... so we thought that these are good present ideas:</h2>
 
                 <h3>
-                    <div ng-repeat="product in bc.products">
+                    <div ng-repeat="product in uc.products">
                         <div id="DIV_1">
                             <div id="DIV_2">
                                 <div id="DIV_3">
