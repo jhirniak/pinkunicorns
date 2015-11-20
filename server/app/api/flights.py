@@ -1,6 +1,21 @@
+import csv
 import pickle
 
 from amadeus.amadeus import Flights
+
+class Airport(object):
+
+    def __init__(self, row):
+        self.code = row[0]
+        self.airportName = row[1]
+        self.nearestCity = row[2]
+        self.country = row[3]
+        self.countryCode = row[4]
+        self.geoloc = {
+            'lat': row[5],
+            'lng': row[6]
+        }
+
 
 class InspiredFlights:
     def __init__(self):
@@ -12,12 +27,16 @@ class InspiredFlights:
             departure_date="2015-11-20--2015-11-22",
             max_price=budget)
 
-        with open('acodes.pickle', 'rb') as fh:
-            resp['acodes'] = pickle.load(fh)
-
         return resp
+
+    def get_acodes(self):
+        with open('acodes.pickle') as fh:
+            acodes = pickle.load(fh)
+            print "GEO", acodes['SFO'].geoloc
+            return acodes
 
 
 if __name__ == '__main__':
     flights = InspiredFlights()
     print flights.where_can_i_fly('SFO', 300)
+    print flights.get_acodes()['SFO'].geoloc
