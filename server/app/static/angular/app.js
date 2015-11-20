@@ -28,6 +28,10 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
     $scope.get_query = function (event) {
         event.preventDefault();
         $scope.loading = true;
+        $scope.visibility = '';
+        $scope.longTravel = false;
+        $scope.shortTravel = false;
+
     	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
             .then(function (resp) {
             	$('#wyjebmnie').slideUp(1000, function() {
@@ -38,27 +42,27 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
           var d = resp.data;
 	      console.log(d);
 	      if(d["type"] == "travel") {
+            $scope.visibility = "travel";
+            $scope.travel = d["travel"];
+
             if(_.has(d, 'accomodation')) {
               $scope.longTravel = true;
-              console.log('Long');
+                $scope.accomodation = d["accomodation"];
+                $scope.accomodation.result = _.map($scope.accomodation.result, function (item) {
+                    item.rating = _.range(Math.floor((Math.random() * 5) + 1));
+                    return item;
+                });
+
+              $scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=3');
             } else {
               $scope.shortTravel = true;
               console.log('short');
+              $scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=11');
             }
-
-	      	$scope.accomodation = d["accomodation"];
-            $scope.accomodation.result = _.map($scope.accomodation.result, function (item) {
-                item.rating = _.range(Math.floor((Math.random() * 5) + 1));
-                return item;
-            });
-
-	      	$scope.travel = d["travel"];
-	      	$scope.visibility = "travel";
-	      	$scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=3');
 	      } else if(d["type"] == "birthdays") {
 	      	$scope.likes = Object.keys(d.products);
             $scope.name = d.name;
-            products = _.flatten(_.values(d.products));
+            var products = _.flatten(_.values(d.products));
             $scope.products = [];
             for (var i = 0; i < products.length; i++) {
             	if(products[i]["price"] != "" && products[i]["price"] > 0) {
