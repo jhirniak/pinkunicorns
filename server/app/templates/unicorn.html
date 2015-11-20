@@ -119,14 +119,14 @@
 </div>
 
 
-<div class="container" ng-show="cat['hotel']" id="hotel">
+<div class="container" ng-show="isVisible('travel')" id="hotel">
   <div class="jumbotron">
     <div class="map">
       <iframe
         width="400"
         height="600"
         frameborder="0" style="border:0"
-        ng-src="{{getRU + '?origin='+travel['places'][0]['pos']+'&destination='+travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM'}}"
+        ng-src="{{getRU}}"
         allowfullscreen>
       </iframe>
     </div>
