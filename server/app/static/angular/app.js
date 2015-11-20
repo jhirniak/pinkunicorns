@@ -1,4 +1,4 @@
-var app = angular.module('unicornX', []);
+var app = angular.module('unicornX', ['ui.bootstrap']);
 
 app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,$sce) {
     $scope.visibility = "";
@@ -28,8 +28,10 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
 	      console.log(d);
 	      if(d["type"] == "travel") {
             if(_.has(d, 'accomodation')) {
+              $scope.longTravel = true;
               console.log('Long');
             } else {
+              $scope.shortTravel = true;
               console.log('short');
             }
 
