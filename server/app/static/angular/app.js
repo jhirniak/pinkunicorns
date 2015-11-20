@@ -24,11 +24,16 @@ app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
         console.log('Changed query to ' + $scope.query);
 
         if ($scope.query.indexOf('travel') > -1) {
-            $scope.cat['hotel'] = true;
+            switchToHotel();
         }
 
         console.log('cat is ', $scope.cat);
     };
+
+    function switchToHotel() {
+        $scope.cat['hotel'] = true;
+        $.toaster({ priority : 'success', title : 'Title', message : 'Your message here'});
+    }
 
     console.log('Controller ready');
 

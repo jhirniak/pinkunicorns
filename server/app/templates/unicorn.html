@@ -37,7 +37,7 @@
       </h1>
     </div>
     <form action="#" ng-submit="get_query()" >
-      <input ng-model="query" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
+      <input ng-model="query" ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
     </form>
   </div>
 </div>
@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<div class="container" ng-show="cat['hotel']">
+<div class="container" ng-show="cat['hotel']" id="hotel">
   <div class="jumbotron">
     <div class="map">
       <iframe
