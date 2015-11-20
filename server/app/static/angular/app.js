@@ -3,8 +3,14 @@ var app = angular.module('unicornX', []);
 app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
 
     $scope.cat = {
-        'hotel': false
+        'travel': false
     };
+
+    $scope.visibility = "";
+
+    $scope.isVisible = function(x) {
+    	return $scope.visibility == x;
+    }
 
     $scope.message = "";
     $scope.query = "";
@@ -13,10 +19,22 @@ app.controller("UnicornCtrl", ['$scope', '$http', function($scope) {
     $scope.clear = function() {$scope.message = "";};
     $scope.save  = function() {alert("Note Saved");};
 
-    $scope.get_query = function() {
+    $scope.get_query = function(event) {
+        event.preventDefault();
     	$.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken, function (d) {
-	      $('#herestuff').html(d);
 	      console.log(d);
+	      if(d["type"] == "travel") {
+	      	$scope.accomodation = d["accomodation"];
+	      	$scope.travel = d["travel"];
+	      	$scope.visibility = "travel";
+	      } else if(d["type"] == "birthdays") {
+	      	$scope.likes = Object.keys(d.products);
+            $scope.name = d.name;
+            $scope.products = _.flatten(_.values(d.products));
+            $scope.visibility = "birthdays";
+	      } else if(d["type"] == "") {
+	      	
+	      }
 	    });
     };
 

@@ -36,8 +36,10 @@
         <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
       </h1>
     </div>
-    <form action="#" ng-submit="get_query()" >
+
+    <form action="#" ng-submit="get_query($event)" >
       <input ng-model="query" ng-change="quornuj()" class="form-control text-center" style="font-size: 25px; height: 50px" type="text" autofocus>
+
     </form>
   </div>
 </div>
@@ -64,10 +66,10 @@
 
 {% raw %}
 <div>
-    <div ng-show="uc.isLoaded">
+    <div ng-show="isVisible('birthdays')">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {uc.name} likes</h2>
+                <h2>We found that your friend {name} likes</h2>
 
                 <h3>
                 <span ng-repeat="like in uc.likes" class="label label-primary">{like}<span
@@ -78,7 +80,7 @@
                 <h2>... so we thought that these are good present ideas:</h2>
 
                 <h3>
-                    <div ng-repeat="product in uc.products">
+                    <div ng-repeat="product in products">
                         <div id="DIV_1">
                             <div id="DIV_2">
                                 <div id="DIV_3">
@@ -116,6 +118,7 @@
     </div>
 </div>
 
+
 <div class="container" ng-show="cat['hotel']" id="hotel">
   <div class="jumbotron">
     <div class="map">
@@ -138,7 +141,7 @@
     <div id="cleared"></div>
   </div>
 </div>
-
+</div>
 {% endraw %}
 
 </body>
