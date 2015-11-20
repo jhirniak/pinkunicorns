@@ -3,8 +3,12 @@ from flask_restful import reqparse
 from app.nlp.nlp import NLP
 from app.api.social import Facebook
 from app.api.shopping import Amazon
-#from app.api.gcal import GCal
+# from app.api.gcal import GCal
 import json
+from app.api.jarvis import *
+from app.api.rome_to_rio import *
+from app.api.accomodation import AirBnB
+from app.api.taxi import Uber
 
 class Analyse(restful.Resource):
     def get(self):
@@ -21,6 +25,7 @@ class Analyse(restful.Resource):
 
         return data
 
+
 class GoogleCalendar(restful.Resource):
     def get(self):
         parser = reqparse.RequestParser()
@@ -33,6 +38,7 @@ class GoogleCalendar(restful.Resource):
 
         return json.dumps(response)
 
+
 class RunTask(restful.Resource):
     def get(self):
         parser = reqparse.RequestParser()
@@ -42,7 +48,7 @@ class RunTask(restful.Resource):
 
         if args['category'] == 'shopping':
             facebook = Facebook(
-                'CAAGyweZCX3VUBANuYII15rall8Qg4mhjibqu8euyup8e68Wail44pWM8sGyEhgvkmhqJYZBJ4ZBTYs58CcP3vfAMM6U3LXYl2wJvbxwLZA6mAeQl2WQAcZC8kzkFbDfF5rQsCB0ppspRug4sVHX4o9N8wAZAwv7bUxBh8i0JNFP1sZAO5cHKPKfWDGZA0FVOWHepwn4XZCh29LOuw6OATZAGhu')
+                'CAAGyweZCX3VUBAFUgJTDxFBVCUG1vux1mF5j1BfTUUGWTDqnc0VzRPn1hg0ZCtmv1S9StPpi5iSF4GGqD4YsMVA3f0oEf3YRG7hLDXSPxx0OvTI5ZA9MbiUCjlHy7lBa83kjZAVO52Py1u6nQFIyZBxwn2P86ITYYjaK2D0tAraFdqG8csbuoLDMUPef3eN9bDVJXX78s7JEXB82WBpa7')
             likes = facebook.get_likes(args['text'])
             print likes
             amazon = Amazon()
@@ -56,11 +62,51 @@ class RunTask(restful.Resource):
 
             return products
 
-        elif args['category'] == 'travel':
-            pass
 
-        elif args['category'] == 'meeting':
-            pass
+class Jarvis(restful.Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('text')
+        args = parser.parse_args()
 
-        else:
-            pass
+        data = parse(args['text'])
+
+        if data['intent'] == 'birthdays':
+            facebook = Facebook(
+                'CAAGyweZCX3VUBAFUgJTDxFBVCUG1vux1mF5j1BfTUUGWTDqnc0VzRPn1hg0ZCtmv1S9StPpi5iSF4GGqD4YsMVA3f0oEf3YRG7hLDXSPxx0OvTI5ZA9MbiUCjlHy7lBa83kjZAVO52Py1u6nQFIyZBxwn2P86ITYYjaK2D0tAraFdqG8csbuoLDMUPef3eN9bDVJXX78s7JEXB82WBpa7')
+            likes = facebook.get_likes(data['entities']['contact'][0]['value'])
+
+            amazon = Amazon()
+
+            products = {}
+
+            for like in likes:
+                items = amazon.search_for(like)
+                if len(items) == 2:
+                    products[like] = items[1]
+
+            return products
+
+        elif data['intent'] == 'travel':
+            response = {'travel':{}}
+
+            rome2rio = get_rome_rio('Menlo Park', data['entities']['location'][0]['value'])
+            response['travel']['plan'] = rome2rio[0][0]
+            response['travel']['places'] = rome2rio[1]
+
+            pos = rome2rio[1][1]['pos'].split(',')
+
+
+            if response['travel']['plan']['distance'] > 200:
+                airbnb = AirBnB()
+                response['accomodation'] = airbnb.get_accomodation(pos[0], pos[1])
+            else:
+                uber = Uber()
+
+                start = rome2rio[1][0]['pos'].split(',')
+
+                response['taxi'] = uber.get_estimate(start[0], start[1], pos[0], pos[1])
+
+
+
+            return response

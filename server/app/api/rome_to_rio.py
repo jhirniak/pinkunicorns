@@ -4,7 +4,7 @@ from flask import render_template
 import unirest
 
 api_url = 'https://rome2rio12.p.mashape.com/Search'
-api_key = 'PASTE KEY HERE FUCKER'
+api_key = 'PZneH0HEG8msh54NEygzesVhOa7Cp1z2Vr3jsnBhXLwVXlH3pO'
 
 
 def get_route(from_name, to_name):
@@ -44,5 +44,5 @@ def get_rome_rio(from_name, to_name, preview=False):
     for route in routes:
         route['duration'] = duration_hours(int(route['duration']))
 
-    return routes
+    return routes, places
     # return render_template('route.html', routes=routes, preview=preview, places=places)

@@ -9,7 +9,7 @@ class Facebook:
         friends = self.graph.get_connections(id='me', connection_name='friends')['data']
         print friends
         for friend in friends:
-            if friend['name'] == name:
+            if str(friend['name']).lower().startswith(name.lower()):
                 friend_id = friend['id']
                 likes = self.graph.get_connections(id=friend_id, connection_name='likes')['data']
 
