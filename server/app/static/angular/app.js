@@ -30,6 +30,10 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,
         $scope.loading = true;
     	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
             .then(function (resp) {
+            	$('#wyjebmnie').slideUp(1000, function() {
+            		
+            	});
+            	$('#wjebmnie').slideDown(1000);
                 $scope.loading = false;
           var d = resp.data;
 	      console.log(d);

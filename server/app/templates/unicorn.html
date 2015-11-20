@@ -67,6 +67,9 @@
     <div id="wyjebmnie">
       <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
     </div>
+    <div id="wjebmnie" class="text-center" style="display:none;">
+        <h1 style="font-size: 10em">Unicorn<b>X</b></h1>
+    </div>
     <div class="page-header text-center">
       <h1>
         <small>Hello, <span id="my_name" style="display:inline;"></span>. How can I help you today?</small>
@@ -171,9 +174,9 @@
       <hr>
 
         <div class="row">
-            <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'" >
+            <div class="col-sm-6 col-md-4" ng-repeat="place in accomodation.result|orderBy:'-rating'">
                 <div class="thumbnail" style="height: 400px;">
-                    <div style="height: 180px;">
+                    <div style="height: 180px; padding-top: 15px" >
                         <img src="{{place.photos[0].medium}}" alt="Image" style="border: 1px solid black" class="center-block"></div>
                     <div class="caption">
                         <h4 style="height: 80px;">{{place.location.all}}</h4>
@@ -190,7 +193,6 @@
     <div id="cleared"></div>
   </div>
 </div>
-
 
 <div class="container" ng-show="isVisible('travel') && shortTravel" id="hotel">
   <div class="jumbotron">
@@ -223,6 +225,10 @@
 </div>
 </div>
 {% endraw %}
-
+<div class="footer navbar-fixed-bottom" style="background: #dddddd;">
+  <div class="panel-body">
+    &copy; 2015 Unicorn<i>X</i>™ 🦄
+  </div>
+</div>
 </body>
 </html>
