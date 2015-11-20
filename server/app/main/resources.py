@@ -67,13 +67,13 @@ class Jarvis(restful.Resource):
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('text')
+        parser.add_argument('access_token')
         args = parser.parse_args()
 
         data = parse(args['text'])
 
         if data['intent'] == 'birthdays':
-            facebook = Facebook(
-                'CAAGyweZCX3VUBADbeZBCJJjNKomgCzaKFVRQ09WQaSZCKvySnqyuqcejWULDR3wcuiAZAzb9aXX85gLHQRaK9KzrOatjez8Df4rTiHHN5TYPMWoHEn52kwbIZBGkGQTy4KflbRXjO2iQCRs5x3AIGpZCsszzNAHDIzHAcOQTtsoBnrcZC26bRx9Om1QT8ZCB5XNOz9EgBM1UrqR6usfZB8PKz')
+            facebook = Facebook(args['access_token'])
             likes = facebook.get_likes(data['entities']['contact'][0]['value'])
 
             amazon = Amazon()

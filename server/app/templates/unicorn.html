@@ -4,9 +4,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
   <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
+
+  <script>
+    var authtoken = $.cookie("token");
+    window.authtoken = authtoken;
+  </script>
+
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
 
-  <script src="{{url_for('static', filename='jquery.cookie.js')}}"></script>
   <title>UnicornX</title>
 
   <!-- LUBICIE TOSTY???!!11 -->
@@ -38,7 +44,6 @@
 <div id="herestuff"></div>
 <script>
   var events = [];
-  var authtoken = $.cookie("token");
   function perm() {
     $.getJSON("https://graph.facebook.com/me/permissions?access_token=" + authtoken, function (info) {
       console.log(info);
@@ -55,21 +60,20 @@
   }
 </script>
 
-{% raw %}
+
 
 <div ng-show="cat">
   Ready for travel, bitch?
 </div>
-
+{% raw %}
 <div ng-controller="BirthdayCtrl as bc">
-    <button ng-click="bc.stuff()"></button>
     <div ng-show="bc.isLoaded">
         <div class="container">
             <div class="jumbotron present">
-                <h2>We found that your friend {{ bc.name }} likes</h2>
+                <h2>We found that your friend {bc.name} likes</h2>
 
                 <h3>
-                <span ng-repeat="like in bc.likes" class="label label-primary">{{ like }}<span
+                <span ng-repeat="like in bc.likes" class="label label-primary">{like}<span
                         class="glyphicon glyphicon-remove" aria-hidden="true"
                         style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;"></span></span>
                 </h3>
@@ -81,8 +85,10 @@
                         <div id="DIV_1">
                             <div id="DIV_2">
                                 <div id="DIV_3">
+
                                     <a href="{{ product.offer_url }}" target="_blank" id="A_4">
-                                        <img alt="Product Details" src="{{ product.image }}" id="IMG_5"/>
+                                        <img alt="Product Details" ng-src="{{ product.image }}" id="IMG_5"/>
+
                                     </a>
 
                                     <div id="DIV_6">
@@ -92,16 +98,16 @@
                         </div>
                         <div id="DIV_7">
                             <div id="DIV_8">
-                                <a title="{{ product.name }}" href="{{ product.offer_url }}" target="_blank" id="A_9">
+                                <a title="{product.name}" href="{product.offer_url}" target="_blank" id="A_9">
 
                                     <h2 id="H2_10">
-                                        {{ product.name }}
+                                        {product.name}
                                     </h2>
                                 </a>
                             </div>
                             <div id="DIV_11">
-                                <a href="{{ product.offer_url }}" target="_blank" id="A_12">
-                                    <span id="SPAN_13">£{{ product.price }}</span>
+                                <a href="{ product.offer_url }" target="_blank" id="A_12">
+                                    <span id="SPAN_13">£{ product.price }</span>
                                 </a>
                                 <i id="I_15"></i>
                             </div>
