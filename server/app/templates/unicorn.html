@@ -2,6 +2,7 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="{{ url_for('static', filename='bower_components/angular-bootstrap/ui-bootstrap.min.js') }}"></script>
   <link href="{{url_for('static', filename='bootstrap/css/bootstrap.css')}}" rel="stylesheet">
   <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
   <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
@@ -21,8 +22,25 @@
 
   .lol-co {
       margin-left: 10px;
+      height: 40px;
+      display: inline-block;
   }
 
+  .center {
+    width: 64px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+    .center2 {
+        width: 800px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
   </style>
 
   <script src="{{url_for('static', filename='angular/app.js')}}"></script>
@@ -39,8 +57,8 @@
   <script src="{{url_for('static', filename='jquery.toaster.js')}}"></script>
   <!-- TOSTY SIE SKONCZYLY -->
 </head>
-<body onload="getProfile();" ng-controller="UnicornCtrl">
-<div class="container" >
+<body onload="getProfile();" ng-controller="UnicornCtrl" style="margin-top: 50px;">
+<div class="container">
   <div>
     <div id="wyjebmnie">
       <img src="{{url_for('static', filename='unicorn.jpg')}}" class="center-block cbi">
@@ -76,70 +94,68 @@
   }
 </script>
 
-
-
+<div ng-show="loading" class="center">
+    <img src="{{url_for('static', filename='spinner.gif')}}">
+</div>
 {% raw %}
+<!--what can i get michael for his birthday-->
 <div>
     <div ng-show="isVisible('birthdays')">
         <div class="container">
             <div class="jumbotron present">
                 <h2>We found that your friend {{name}} likes</h2>
 
-                <h3>
-                <span ng-repeat="like in likes" class="label label-primary lol-co">
+                <h3><div class="row">
+                    <!-- position: relative; top: 0; right: -.3em; padding-left: .4em;-->
+               <div ng-repeat="like in likes" class="lol-co">
+               <span class="label label-primary">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                        style="font-size:.8em; position: relative; top: 0; right: -.3em; padding-left: .4em;">
+                        style="font-size:.8em; ">
                        {{like}}
-                    </span></span>
+                    </span></span></div></div>
                 </h3>
 
                 <h2>... so we thought that these are good present ideas:</h2>
-
-                <h3>
-                    <div ng-repeat="product in products">
-                        <div id="DIV_1">
-                            <div id="DIV_2">
-                                <div id="DIV_3">
-
-                                    <a href="{{ product.offer_url }}" target="_blank" id="A_4">
-                                        <img class="cipa" alt="Product Details" ng-src="{{ product.image }}" id="IMG_5"/>
-
-                                    </a>
-
-                                    <div id="DIV_6">
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4" ng-repeat="product in products" >
+    <div class="thumbnail" style="height: 350px;">
+        <div style="height: 150px;">
+      <img src="{{product.image}}" alt="Image" class="center-block"></div>
+      <div class="caption">
+        <h4 style="height: 80px;">{{product.name}}</h4>
+        <p>£{{product.price}}</p>
+        <p><a href="{{product.offer_url}}" class="btn btn-primary" target="_blank" role="button">Get it now!</a></p>
+      </div>
+    </div>
+  </div>
+                   <!-- <div 
+                        style="padding: 10px;">
+                        <div class="col-md-2" style="height: 100px;">
+                            <a href="{{ product.offer_url }}" target="_blank">
+                                <img class="cipa" alt="Product Details" ng-src="{{ product.image }}"/>
+                            </a>
                         </div>
-                        <div id="DIV_7">
-                            <div id="DIV_8">
-                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank" id="A_9">
-
-                                    <h2 id="H2_10">
+                        <div class="col-md-4" style="height: 100px;">
+                                <a title="{{product.name}}" href="{{product.offer_url}}" target="_blank">
+                                    <b>
                                         {{product.name}}
-                                    </h2>
-                                </a>
-                            </div>
-                            <div id="DIV_11">
-                                <a href="{{product.offer_url}}" target="_blank" id="A_12">
-                                    <span id="SPAN_13">£{{product.price}}</span>
-                                </a>
-                                <i id="I_15"></i>
-                            </div>
+                                    </b>
+                                </a>                      
+                                    <span>£{{product.price}}</span>
                         </div>
-                    </div>
-                </h3>
+                    </div>-->
             </div>
+        </div>
         </div>
     </div>
 </div>
 
 
-<div class="container" ng-show="isVisible('travel')" id="hotel">
+<div class="container" ng-show="isVisible('travel') && longTravel" id="hotel">
   <div class="jumbotron">
     <div class="map">
-      <iframe
-        width="400"
+      <iframe class="center2"
+        width="800"
         height="600"
         frameborder="0" style="border:0"
         ng-src="{{getRU}}"
@@ -148,10 +164,16 @@
     </div>
     <div class="info">
 
-
-
       <hr>
-      <h2>Your reservation in Aloft Silicon Valley</h2>
+
+        <div class="row">
+          <div ng-repeat="place in accomodation.result" class="col-sm-6 col-md-4">
+              <img ng-src="{{ place.photos[0].medium }}" alt="Image">
+
+              <span>{{ place.price.nightly }}</span>
+            </div>
+          </div>
+        </div>
 
     </div>
     <div id="cleared"></div>
@@ -159,13 +181,9 @@
 </div>
 </div>
 
-
-<div class="container" ng-show="isVisible('restaurants')" id="restaurants">
-  <div class="jumbotron">
-
-    <div id="map" style="width: 900px; height: 720px;"></div>
-
-  </div>
+<div class="container" ng-show="restaurants" id="restaurants">
+<div class="jumbotron">
+  <div id="map" style="width: 900px; height: 720px;"></div>
 </div>
 </div>
 {% endraw %}

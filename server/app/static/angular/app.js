@@ -1,11 +1,13 @@
 var app = angular.module('unicornX', []);
 
-app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
+app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function($scope,$http,$sce) {
     $scope.visibility = "";
 
     $scope.isVisible = function (x) {
         return $scope.visibility == x;
     };
+
+    $scope.loading = false;
 
     //$sce.trustAsResourceUrl("https://maps.googleapis.com/maps/api/directions/json");
 
@@ -25,21 +27,30 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function ($scope, $htt
 
     $scope.get_query = function (event) {
         event.preventDefault();
-        $http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token=' + window.authtoken)
+        $scope.loading = true;
+    	$http.get('/api/v1/jarvis?text=' + $scope.query + '&access_token='+window.authtoken)
             .then(function (resp) {
-                var d = resp.data;
-                console.log(d);
-                alert(d["type"]);
-                if (d["type"] == "travel") {
-                    $scope.accomodation = d["accomodation"];
-                    $scope.travel = d["travel"];
-                    $scope.visibility = "travel";
-                    $scope.getRU = $sce.trustAsResourceUrl('https://maps.googleapis.com/maps/api/directions/json?origin=' + $scope.travel['places'][0]['pos'] + '&destination=' + $scope.travel['places'][1]['pos'] + '&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM');
-                } else if (d["type"] == "birthdays") {
-                    $scope.likes = Object.keys(d.products);
-                    $scope.name = d.name;
-                    $scope.products = _.flatten(_.values(d.products));
-                    $scope.visibility = "birthdays";
+                $scope.loading = false;
+          var d = resp.data;
+	      console.log(d);
+	      if(d["type"] == "travel") {
+            if(_.has(d, 'accomodation')) {
+              $scope.longTravel = true;
+              console.log('Long');
+            } else {
+              $scope.shortTravel = true;
+              console.log('short');
+            }
+
+	      	$scope.accomodation = d["accomodation"];
+	      	$scope.travel = d["travel"];
+	      	$scope.visibility = "travel";
+	      	$scope.getRU = $sce.trustAsResourceUrl('https://www.google.com/maps/embed/v1/directions?origin='+$scope.travel['places'][0]['pos']+'&destination='+$scope.travel['places'][1]['pos']+'&key=AIzaSyAeLkV7n7z_Kt44uryKbPWuJ7ISHweKBqM' + '&zoom=3');
+	      } else if(d["type"] == "birthdays") {
+	      	$scope.likes = Object.keys(d.products);
+            $scope.name = d.name;
+            $scope.products = _.flatten(_.values(d.products));
+            $scope.visibility = "birthdays";
 
                 } else if (d["type"] == "restaurant_booking") {
                     $scope.visibility = "restaurants";
@@ -67,8 +78,7 @@ app.controller("UnicornCtrl", ['$scope', '$http', '$sce', function ($scope, $htt
                     var map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 10,
                         center: new google.maps.LatLng( (rect.latMax + rect.latMin) / 2, (rect.lngMax + rect.lngMin) / 2),
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
-
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
 
                     var infowindow = new google.maps.InfoWindow();
