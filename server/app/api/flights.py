@@ -1,3 +1,5 @@
+import pickle
+
 from amadeus.amadeus import Flights
 
 class InspiredFlights:
@@ -9,6 +11,9 @@ class InspiredFlights:
             origin=origin,
             departure_date="2015-11-20--2015-11-22",
             max_price=budget)
+
+        with open('acodes.pickle', 'rb') as fh:
+            resp['acodes'] = pickle.load(fh)
 
         return resp
 
