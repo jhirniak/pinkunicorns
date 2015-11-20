@@ -21,12 +21,18 @@ class Amazon:
                     #     title = title[:50] + "..."
 
                     product_titles[product.offer_url] = title
-                    top_products.append(product)
+                    top_products.append({
+                        'offer_url': product.offer_url,
+                        'name': product.title,
+                        'image': product.medium_image_url,
+                        'price': product.price_and_currency[0],
+                        'currency': product.price_and_currency[1],
+                    })
                     top -= 1
                     if top == 0:
                         break
 
-            return top_products, product_titles
+            return top_products
         except:
             return []
 

@@ -13,9 +13,9 @@ def unicorn():
 	return render_template('unicorn.html')
 
 
-@main.route("frame/")
+@main.route("xd")
 def frame():
-    return render_template('frame.html')
+    return render_template('front/index.html')
 
 
 @main.route('view/birthday', methods=['POST'])
@@ -25,7 +25,7 @@ def view_birthday():
 
     # display suggested presents with links
 
-    return render_template('birthday.html')
+    return render_template('angular/birthday.html')
 
 
 @main.route('view/travel', methods=['POST'])

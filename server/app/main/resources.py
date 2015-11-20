@@ -73,7 +73,7 @@ class Jarvis(restful.Resource):
 
         if data['intent'] == 'birthdays':
             facebook = Facebook(
-                'CAAGyweZCX3VUBAFUgJTDxFBVCUG1vux1mF5j1BfTUUGWTDqnc0VzRPn1hg0ZCtmv1S9StPpi5iSF4GGqD4YsMVA3f0oEf3YRG7hLDXSPxx0OvTI5ZA9MbiUCjlHy7lBa83kjZAVO52Py1u6nQFIyZBxwn2P86ITYYjaK2D0tAraFdqG8csbuoLDMUPef3eN9bDVJXX78s7JEXB82WBpa7')
+                'CAAGyweZCX3VUBADbeZBCJJjNKomgCzaKFVRQ09WQaSZCKvySnqyuqcejWULDR3wcuiAZAzb9aXX85gLHQRaK9KzrOatjez8Df4rTiHHN5TYPMWoHEn52kwbIZBGkGQTy4KflbRXjO2iQCRs5x3AIGpZCsszzNAHDIzHAcOQTtsoBnrcZC26bRx9Om1QT8ZCB5XNOz9EgBM1UrqR6usfZB8PKz')
             likes = facebook.get_likes(data['entities']['contact'][0]['value'])
 
             amazon = Amazon()
@@ -82,10 +82,15 @@ class Jarvis(restful.Resource):
 
             for like in likes:
                 items = amazon.search_for(like)
-                if len(items) == 2:
-                    products[like] = items[1]
+                products[like] = items
+                print items
 
-            return products
+            response = {
+                'products': products,
+                'name': data['entities']['contact'][0]['value'],
+            }
+
+            return response
 
         elif data['intent'] == 'travel':
             response = {'travel':{}}
